@@ -3,7 +3,7 @@
 Tipue Search 4.0
 Copyright (c) 2014 Tipue
 Tipue Search is released under the MIT License
-http://www.tipue.com/search
+https://www.tipue.com/search
 */
 
 
