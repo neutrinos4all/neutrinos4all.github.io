@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Making a vita with LaTeX - Applied Caffeine</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://appliedcaffeine.org/latexvita.html">
+
+        <meta name="author" content="Adam Houser" />
+        <meta name="keywords" content="tutorials" />
+        <meta name="description" content="For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started." />
+
+        <meta property="og:site_name" content="Applied Caffeine" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Making a vita with LaTeX"/>
+        <meta property="og:url" content="https://appliedcaffeine.org/latexvita.html"/>
+        <meta property="og:description" content="For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started."/>
+        <meta property="article:published_time" content="2016-04-05" />
+            <meta property="article:section" content="blog" />
+            <meta property="article:tag" content="tutorials" />
+            <meta property="article:author" content="Adam Houser" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://appliedcaffeine.org/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://appliedcaffeine.org/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/style.css" type="text/css"/>
+
+        <link href="https://appliedcaffeine.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Applied Caffeine ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://appliedcaffeine.org/" class="navbar-brand">
+Applied Caffeine            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="http://www.google.com/recaptcha/mailhide/d?k=01tbzD4xfy4JhpJBPyhOMiIA==&c=OlheiSl4NgBb6mWA7EtUWTORPle6sjEXWB0ttpiPDW0=">Email...</a></li>
+                    <li><a href="https://pgp.mit.edu/pks/lookup?op=get&search=0xC37BE58D57EBB76B">...and its PGP Key</a></li>
+                    <li><a href="/category/blog.html">Blog</a></li>
+                    <li><a href="/docs/HouserCV.pdf">Curriculum Vitae</a></li>
+                    <li><a href="/pages/publications.html">Publications</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="https://appliedcaffeine.org/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://appliedcaffeine.org/latexvita.html"
+                       rel="bookmark"
+                       title="Permalink to Making a vita with LaTeX">
+                        Making a vita with LaTeX
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-04-05T00:00:00-04:00"> Tue 05 April 2016</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>I have to admit, one of the principal reasons for building the site is to have a personalized space on the <a href="http://www.theverge.com/2016/4/2/11352744/ap-style-guide-will-no-longer-capitalize-internet">internet</a> that people (and potential employers) can use to get a sense of me as a potential employee. I can display some of my projects, talk about the work I do, and get some info about my interests. I used LinkedIn for a long time, but sometime ~2015 I realized it was becoming less useful for actual employer networking or job-searching. I recently decided I didn't want to use their service any more, made this site, and took down my LinkedIn profile. Maybe sometime I'll write more in-depth about it, perhaps once I've been out of the service for a while.</p>
+<p>Anyway, that meant I'd need a proper <a href="https://www.ncfr.org/professional-resources/career-resources/general-career-resources/your-cv-it-vita-or-vitae">curriculum vitae</a>, or at least some written and preferably downloadable method for communicating details about my education, work experience, and qualifications. I had made a vita before, but I used Word and it showed. I knew a bit of LaTeX and I wanted to demonstrate what skills I had, plus maybe continue to work on them a bit, so I decided to make the entire CV with it.</p>
+<p>I knew that I wanted to use a pre-canned template, vowing that some day I would write my own, eventually landing on <a href="https://www.ctan.org/pkg/moderncv?lang=en">moderncv</a>. It looked relatively good for being a standardized template and seemed easy to use. Once you download it (manually, through either your TeX editor or, if you're using Linux, through Synaptic), call the template at the very top of your .tex document:</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[11pt,a4paper]</span><span class="nb">{</span>moderncv<span class="nb">}</span>
+</pre></div>
+
+
+<p>and you're off and running.</p>
+<p>This tutorial won't focus on using the package, because you can currently find some <a href="https://walrustech.wordpress.com/tag/template/">helpful</a> <a href="https://fredrikloch.me/post/using-moderncv/">content</a> out there on its use--not to mention the actual <a href="https://bazaar.launchpad.net/~xdanaux/moderncv/trunk/view/head:/examples/template.tex">template,</a> which includes an extensive system of very straightforward comments. I don't want to re-hash their work. What I will spend a bit on, though, are the little improvements I made on it.</p>
+<h3>Typesetting</h3>
+<p>I didn't like how the standard moderncv package rendered text, particularly because I didn't like how it handled kerning on larger-point fonts. I opted to use <a href="https://www.google.com/fonts/specimen/EB+Garamond#charset">EB Garamond</a>, an open-source incarnation of the Garamond typeface family. Installed through the <code>texlive-fonts-extra</code> Linux package, I enabled it with:</p>
+<div class="highlight"><pre>\usepackage{ebgaramond}
+</pre></div>
+
+
+<p>I also made use of small capital letters throughout my vita, particularly for section and subsection headings, becuase I thought it added a nice touch and slightly improved readability for text-heavy sections. It can be safely used throughout the template by calling <code>\textsc{your text here}</code> anywhere you'd like to use it.</p>
+<h3>Relevant coursework bulleted items</h3>
+<p>After I listed out all of my coursework with <code>\cvline</code> entries and rendered it, I decided it left too much negative space on the page. Putting my courses in a bulleted format would be a more efficient approach. The code I used for that section can be seen here:</p>
+<div class="highlight"><pre>\section{\textsc{Relevant Coursework}}
+\hspace{6.4em}
+\begin{tabular}{p{.4\textwidth}p{.5\textwidth}}
+    $\cdot$ Advanced Formal Methods Techniques &amp; $\cdot$ Human Factors Research Methodology\\
+    $\cdot$ Cognitive Engineering &amp; $\cdot$ Human Information Processing\\
+    $\cdot$ Cognitive Processes &amp; $\cdot$ Industrial Hygiene\\
+    $\cdot$ Design and Analysis of Experiments &amp; $\cdot$ Java Programming I\\
+    $\cdot$ Formal Methods in Human Factors &amp; $\cdot$ Ontology Engineering\\
+    $\cdot$ Home Health Innovations &amp; $\cdot$ Sensing Realities\\
+    $\cdot$ Human-Computer Interaction &amp; $\cdot$ Safety in Human Factors\\
+\end{tabular}
+</pre></div>
+
+
+<p>It may take some custom tinkering on your part, but I'll provide a bit of explanation for the included commands:</p>
+<ul>
+<li><code>\hspace{}</code> adds horizontal white space, depending on the argument you give it inside the curly braces. The 'em' unit label signifies an amount of horizontal space equivalent to an uppercase letter "M" in the font being currently used. As someone else told me, it's sometimes easier to visualize how large those differences are as opposed to points or millimeters.</li>
+<li><code>{tabular}{p{.4\textwidth}p{.5\textwidth}}</code> sets the two columns in my table, as well as the portion of the page that each column will occupy given in a decimal fraction of the total "text-occupiable space" width. Here, the first column will take 40% of the width and the second will take 50%. If you left it at .5 and .5, you'd notice that the righthand column was pushed a little too far over, a residual effect from modifying the <code>\hspace{}</code> parameter earlier. Reducing the size of the lefthand column will pull the righthand column over, the amount of which can be finely controlled by modifying the decimal value passed in.</li>
+<li><code>$\cdot$</code> is just the LaTeX math symbol code used to render the bullets in my list. There are many ways to do it, but if you wanted to stick with a mathematical symbol check <a href="http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html">this</a> page for a quick reference.</li>
+</ul>
+<h3>Tasteful colors and formatting</h3>
+<p>The rest is up to you, your particular tastes, and what you think would make for a professional-looking vita. Using a bit of color in sparing fashion can add a bit of style to your document, so long as it isn't too loud. LaTeX allows for an endless variety of customization and tweaking, so don't shy away from using its capabilities to your advantage.</p>
+<p>As always, if you find mistakes or have questions, please send an email.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="images/adam_reduced.jpg"/>
+        </p>
+    <p>
+        <strong>About Adam Houser</strong><br/>
+        Human factors, mental models, formal methods, cybersecurity, coffee.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+
+
+
+            <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/human-factors.html">
+                            human factors
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/cybersecurity.html">
+                            cybersecurity
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://appliedcaffeine.org/tag/systems-engineering.html">
+                            systems engineering
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://hfes.eng.buffalo.edu" target="_blank">
+                HFES Student Chapter
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://fhsl.eng.buffalo.edu" target="_blank">
+                Formal Human Systems Lab
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">
+                Google Scholar
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://twitter.com/neutrinos4all" target="_blank">
+                Twitter
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://github.com/adamhouser" target="_blank">
+                Github
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">
+            This static site is generated with <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>, utilizes the <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a> theme, and proudly supports open-source software.              <p><small>  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://appliedcaffeine.org/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://appliedcaffeine.org/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://appliedcaffeine.org/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

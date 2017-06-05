@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Managing passwords with KeePassX and Syncthing - Applied Caffeine</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://appliedcaffeine.org/using-keepassx-and-syncthing.html">
+
+        <meta name="author" content="Adam Houser" />
+        <meta name="keywords" content="tutorials" />
+        <meta name="description" content="Improve your operational security by moving to a locally-stored password generation and storage utility." />
+
+        <meta property="og:site_name" content="Applied Caffeine" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Managing passwords with KeePassX and Syncthing"/>
+        <meta property="og:url" content="https://appliedcaffeine.org/using-keepassx-and-syncthing.html"/>
+        <meta property="og:description" content="Improve your operational security by moving to a locally-stored password generation and storage utility."/>
+        <meta property="article:published_time" content="2016-05-10" />
+            <meta property="article:section" content="blog" />
+            <meta property="article:tag" content="tutorials" />
+            <meta property="article:author" content="Adam Houser" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://appliedcaffeine.org/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://appliedcaffeine.org/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/style.css" type="text/css"/>
+
+        <link href="https://appliedcaffeine.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Applied Caffeine ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://appliedcaffeine.org/" class="navbar-brand">
+Applied Caffeine            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="http://www.google.com/recaptcha/mailhide/d?k=01tbzD4xfy4JhpJBPyhOMiIA==&c=OlheiSl4NgBb6mWA7EtUWTORPle6sjEXWB0ttpiPDW0=">Email...</a></li>
+                    <li><a href="https://pgp.mit.edu/pks/lookup?op=get&search=0xC37BE58D57EBB76B">...and its PGP Key</a></li>
+                    <li><a href="/category/blog.html">Blog</a></li>
+                    <li><a href="/docs/HouserCV.pdf">Curriculum Vitae</a></li>
+                    <li><a href="/pages/publications.html">Publications</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="https://appliedcaffeine.org/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://appliedcaffeine.org/using-keepassx-and-syncthing.html"
+                       rel="bookmark"
+                       title="Permalink to Managing passwords with KeePassX and Syncthing">
+                        Managing passwords with KeePassX and Syncthing
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-05-10T00:00:00-04:00"> Tue 10 May 2016</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>I've been trying to improve my digital operational security for the past three or four years, and this has included a lot of tutorial, forum, and Reddit browsing. The amount of information you can find on ways to keep yourself safe online is daunting, but one of the most challenging aspects of this effort is the separation of good advice from bad (and believe me, there's a lot more of the bad than the good). I was really curious about what programs or strategies others were using, particularly when it came to their rationale. This might be "the way" to do it, but <em>why</em> is that so? "Because it just is" doesn't count as an acceptable answer.</p>
+<p>I therefore thought I would write up some basic tutorials about software I use, on the off chance that someone in need stumbles across them and finds them useful.  You can sometimes find good explainers on Reddit when someone asks "What [thing] do you use?" I find them pretty informative, and I wanted to provide the same sort of utility here.</p>
+<h3>A note on password managers</h3>
+<p>The note here is to use one. Using strong passwords that are unique to everything with a distinct login is a major step towards improving your digital opsec. Recycling passwords across services can quickly get you into trouble, particularly if you're unaware that you've been pwn3d by an adversary who will continue to leverage your vulnerability for an indeterminate amount of time. Furthermore, using strong passwords (and here I'm talking about strings of random alphanumeric characters salted with special characters) with high complexity reduces your vulnerability to <a href="https://engineering.purdue.edu/kak/compsec/NewLectures/Lecture24.pdf">dictionary and rainbow table attacks</a>; basically, you want to do the opposite of <a href="http://gizmodo.com/the-25-most-popular-passwords-of-2015-were-all-such-id-1753591514">this</a>.</p>
+<h3>What I used before: LastPass</h3>
+<p>I jumped on the bandwagon and used LastPass, both because it was (and still is) pretty popular and because I liked the customizable options the end user had on security settings: whitelisting login from select countries; adjusting the number of rounds PBKDF2 hashing is conducted to generate login credentials; personal login/logout and two-factor authentication options. I felt like it was a decent menu. The browser plugins were also helpful, providing prompts for autofilling credentials and building a password generator into the autofill popup GUI. It was a nice touch.</p>
+<p>It never really stopped being a good utility, even though I gave them up. They were hacked twice, in <a href="http://www.slashgear.com/lastpass-hacked-users-warned-to-change-master-passwords-05150293/">2011</a> and <a href="http://www.macworld.com/article/2936663/lastpass-was-hacked-heres-what-you-have-to-do.html">2015</a>, but the nature of the 2015 breach and my <a href="http://arstechnica.com/security/2015/06/hack-of-cloud-based-lastpass-exposes-encrypted-master-passwords/">confidence</a> in the way LastPass handled password hashing led to a quick change of my master password ... done. With the 2FA I had included from the beginning also enabled, I wasn't worried about it too much.</p>
+<h3>What I use now: KeePassX and Syncthing</h3>
+<p>I've recently made the switch to using a local password manager, <a href="https://www.keepassx.org/">KeePassX</a>. In reality this was a personal preference, in that for a while I've generally favored exercising more control over my data and the owners of that data; my assumption of that control has been incremental but steady. This was another step in that direction. I realized that I felt more comfortable storing my passwords on a local database that I could personally back up and retain, one that neither resided in cloud storage nor was secured by a third party. After trying out a few different managers, reading about security concerns, narrowing selections to include only open-source software, et cetera, I decided to go with KeePassX.</p>
+<p>By way of providing a few additional notes: see <a href="https://ssd.eff.org/en/module/how-use-keepassx">this page</a> for a decent introduction to installation and use, as well as <a href="https://gist.github.com/jmazzi/436947">this Ruby script</a> for converting the LastPass .csv export file into the .xml file required by the KeePassX import function.</p>
+<p>Once I decided on eschewing a cloud-based password manager for one stored locally, I realized that I'd need a way to provide password access while I was away from my main machine. Keeping them on a dedicated flashdrive seemed a little too risky for me (even if encrypted, I thought I would feel vulnerable if the drive was lost), and I didn't want to sync them with something like Dropbox else I would return to "square one." Using something like <a href="https://syncthing.net/">Syncthing</a> would provide the best of both worlds.</p>
+<p>Available through Synaptic (<code>apt-get install syncthing</code>), one can run it from the terminal (which you can initialize by just typing <code>syncthing</code> or <code>nohup syncthing &amp;</code> if you wanted the daemon to persist after closing the terminal--not something I would recommend following the whole "forgotten background processes can present security challenges" bit, and in which case I think you'd have to use <code>ps ax | grep syncthing</code> to find its PID and kill it). The web interface can be accessed at <code>http://127.0.0.1:8384</code>, or if you prefer an actual desktop GUI it can be installed with <code>apt-get install syncthing-gtk</code>. While I won't be providing a configuration tutorial for it, <a href="https://docs.syncthing.net/intro/getting-started.html">resources</a> can be easily found online. Web interface access can be HTTPS-enabled for entering Syncthing login credentials, and all traffic between associated machines is secured using TLS. I also like that it has a few different settings for versioning methods, which is important for a KeePassX database that you may want the freedom to update from your different machines. With Syncthing running, any upate made to a KeePassX database file will be propagated to the other associated machines and an older copy can be retained on those machines. I think this series of options makes for a powerful utility.</p>
+<h3>Verdict</h3>
+<p>I'm generally happy with this setup, and I have no major complaints (the only issue to date is that the Syncthing client can be a little flaky at times with establishing and maintaining connections to associated computers). I would recommend giving it a shot if you wanted to move from cloud-based password management to a solution that you locally controlled.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="images/adam_reduced.jpg"/>
+        </p>
+    <p>
+        <strong>About Adam Houser</strong><br/>
+        Human factors, mental models, formal methods, cybersecurity, coffee.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+
+
+
+            <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/human-factors.html">
+                            human factors
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/cybersecurity.html">
+                            cybersecurity
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://appliedcaffeine.org/tag/systems-engineering.html">
+                            systems engineering
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://hfes.eng.buffalo.edu" target="_blank">
+                HFES Student Chapter
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://fhsl.eng.buffalo.edu" target="_blank">
+                Formal Human Systems Lab
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">
+                Google Scholar
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://twitter.com/neutrinos4all" target="_blank">
+                Twitter
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://github.com/adamhouser" target="_blank">
+                Github
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">
+            This static site is generated with <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>, utilizes the <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a> theme, and proudly supports open-source software.              <p><small>  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://appliedcaffeine.org/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://appliedcaffeine.org/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://appliedcaffeine.org/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
