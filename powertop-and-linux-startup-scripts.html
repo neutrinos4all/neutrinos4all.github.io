@@ -120,8 +120,8 @@ Applied Caffeine            </a>
 <li>
 <p>For each parameter that you've decided to tune, copy only the command and paste it into the file you created.</p>
 <p>Once you're done, it will probably look similar to this:</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env bash</span>
-iw dev wlan0 <span class="nb">set </span>power_save off
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+iw dev wlan0 <span class="nb">set</span> power_save off
 <span class="nb">echo</span> <span class="s1">&#39;min_power&#39;</span> &gt; <span class="s1">&#39;/sys/class/scsi_host/host0/link_power_management_policy&#39;</span><span class="p">;</span>
 <span class="nb">echo</span> <span class="s1">&#39;0&#39;</span> &gt; <span class="s1">&#39;/proc/sys/kernel/nmi_watchdog&#39;</span><span class="p">;</span>
 <span class="nb">echo</span> <span class="s1">&#39;1500&#39;</span> &gt; <span class="s1">&#39;/proc/sys/vm/dirty_writeback_centisecs&#39;</span><span class="p">;</span>
@@ -154,38 +154,38 @@ ethtool -s eth0 wol d<span class="p">;</span>
 <li>
 <p>Once all of the desired commands have been copied over and the file is saved, find and edit <code>/etc/rc.local</code>.</p>
 <p>It should already have something like this in the file:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh -e</span>
-<span class="c">#</span>
-<span class="c"># rc.local</span>
-<span class="c">#</span>
-<span class="c"># This script is executed at the end of each multiuser runlevel.</span>
-<span class="c"># Make sure that the script will &quot;exit 0&quot; on success or any other</span>
-<span class="c"># value on error.</span>
-<span class="c">#</span>
-<span class="c"># In order to enable or disable this script just change the execution</span>
-<span class="c"># bits.</span>
-<span class="c">#</span>
-<span class="c"># By default this script does nothing.</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+<span class="c1">#</span>
+<span class="c1"># rc.local</span>
+<span class="c1">#</span>
+<span class="c1"># This script is executed at the end of each multiuser runlevel.</span>
+<span class="c1"># Make sure that the script will &quot;exit 0&quot; on success or any other</span>
+<span class="c1"># value on error.</span>
+<span class="c1">#</span>
+<span class="c1"># In order to enable or disable this script just change the execution</span>
+<span class="c1"># bits.</span>
+<span class="c1">#</span>
+<span class="c1"># By default this script does nothing.</span>
 </pre></div>
 
 
 <p>Directly below the lines that have been commented out, add the script you just created to <code>rc.local</code>. It should now look like this:</p>
-<div class="highlight"><pre><span class="c">#!/bin/sh -e</span>
-<span class="c">#</span>
-<span class="c"># rc.local</span>
-<span class="c">#</span>
-<span class="c"># This script is executed at the end of each multiuser runlevel.</span>
-<span class="c"># Make sure that the script will &quot;exit 0&quot; on success or any other</span>
-<span class="c"># value on error.</span>
-<span class="c">#</span>
-<span class="c"># In order to enable or disable this script just change the execution</span>
-<span class="c"># bits.</span>
-<span class="c">#</span>
-<span class="c"># By default this script does nothing.</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+<span class="c1">#</span>
+<span class="c1"># rc.local</span>
+<span class="c1">#</span>
+<span class="c1"># This script is executed at the end of each multiuser runlevel.</span>
+<span class="c1"># Make sure that the script will &quot;exit 0&quot; on success or any other</span>
+<span class="c1"># value on error.</span>
+<span class="c1">#</span>
+<span class="c1"># In order to enable or disable this script just change the execution</span>
+<span class="c1"># bits.</span>
+<span class="c1">#</span>
+<span class="c1"># By default this script does nothing.</span>
 
 /usr/local/bin/powertop.sh
 
-<span class="nb">exit </span>0
+<span class="nb">exit</span> <span class="m">0</span>
 </pre></div>
 
 
@@ -202,7 +202,7 @@ ethtool -s eth0 wol d<span class="p">;</span>
 <li>
 <p>Rather than manually copying and pasting the tuning commands into the file, instead replace it with the auto-tune command.</p>
 <p>It should look like this:</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
 powertop --auto-tune
 </pre></div>
 
@@ -239,13 +239,8 @@ powertop --auto-tune
             <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -259,8 +254,13 @@ powertop --auto-tune
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
                         </a>
                     </li>
                     <li class="list-group-item tag-4">

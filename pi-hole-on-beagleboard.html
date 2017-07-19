@@ -116,12 +116,12 @@ Applied Caffeine            </a>
 <li>Debian 8.6 ("Jessie") <a href="https://beagleboard.org/latest-images">IoT image</a>, selected because it's a minimal installation that supports the BBB's onboard connectivity ports but eschews GUI elements (window managers, desktop environments, etc). Installed is only ~1.6gb.</li>
 </ul>
 <p>I flashed the image to the onboard eMMC using <a href="http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/">these instructions</a>, rather than running it full-time from the SD card itself. During flashing, remember that the LEDs will light up in a pattern (1-2-3-4-3-2-1-2-3-4....) and then go all solid when complete; if you're having trouble flashing, navigate to <code>/boot/uEnv.txt</code> on the SD card and <em>uncomment</em> the following line:</p>
-<div class="highlight"><pre>cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
+<div class="highlight"><pre><span></span>cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
 </pre></div>
 
 
 <p>You will also want to modify the following line in that same file, changing <strong>enable</strong> to <strong>disable</strong>:</p>
-<div class="highlight"><pre>cmdline=coherent_pool=1M quiet net.ifnames=0 cape_universal=disable
+<div class="highlight"><pre><span></span>cmdline=coherent_pool=1M quiet net.ifnames=0 cape_universal=disable
 </pre></div>
 
 
@@ -132,7 +132,7 @@ Applied Caffeine            </a>
 <p>Since Pi-hole prefers <a href="https://wiki.archlinux.org/index.php/dnsmasq">dnsmasq</a> as the resolver program, I decided to look at its config file (found at <code>/etc/dnsmasq.conf</code>) for obvious problems and check its syntax (<code>dnsmasq --test</code>). Everything turned out fine and syntax was OK.</p>
 <p>Next, I checked its status (<code>systemctl status dnsmasq.service</code>) and got a <strong>failure.</strong> However, it wasn't very verbose and only really gave me an "exit-code: 2" error. I then resorted to <code>sudo dnsmasq</code> to check the output, and got in return: <code>dnsmasq: failed to create listening socket for port 53: Address already in use!</code> This indicated that something was already bound to and listening on port 53, which was preventing dnsmasq from doing so and thereby disallowing DNS resolution.</p>
 <p>To determine what it was, I asked for the list of programs listening to that port. Running <code>lsof +M -nPi :53</code> gave me:</p>
-<div class="highlight"><pre>COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+<div class="highlight"><pre><span></span>COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 connmand 3825    root   4u   IPv4 165918      0t0  UDP * :53
 connmand 3825    root   5u   IPv4 165919      0t0  TCP * :53 (LISTEN)
 connmand 3825    root   6u   IPv6 165920      0t0  UDP * :53
@@ -147,7 +147,7 @@ connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
 <h3>Second task: Uninstalling node.js to free port 80</h3>
 <p>The second thing I encountered, after getting the DNS resolution to work and checking from the command line that Pi-hole was working, was an inability to access the web interface to manage. Typing <code>http://type.your.pihole.ip/admin/</code> into your browser's URL bar should take you to a nifty little web interface, and from here you can see stats about ads blocked, DNS queries forwarded, etc. It's not necessary for a fully functional Pi-hole, but it's fun and I couldn't access it.</p>
 <p>The browser gave some HTML that said "Couldn't GET /admin/," so because the GET request was failing I thought that the HTTP content needed by the web interface couldn't be retrieved over port 80. I used the same <code>lsof</code> trick used above, but this time substituted port 80 for 53:</p>
-<div class="highlight"><pre> COMMAND   PID     USER    FD  TYPE   DEVICE SIZE/OFF  NODE NAME
+<div class="highlight"><pre><span></span> COMMAND   PID     USER    FD  TYPE   DEVICE SIZE/OFF  NODE NAME
  nodejs   1214 www-data    5u  IPv4   17813       0t0  TCP * :80 (LISTEN)
  nodejs   1214 www-data    6u  IPv6   17814       0t0  TCP * :80 (LISTEN)
 </pre></div>
@@ -187,13 +187,8 @@ connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
             <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -207,8 +202,13 @@ connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
                         </a>
                     </li>
                     <li class="list-group-item tag-4">

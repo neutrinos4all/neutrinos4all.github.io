@@ -103,7 +103,7 @@ Applied Caffeine            </a>
                 <p>I have to admit, one of the principal reasons for building the site is to have a personalized space on the <a href="http://www.theverge.com/2016/4/2/11352744/ap-style-guide-will-no-longer-capitalize-internet">internet</a> that people (and potential employers) can use to get a sense of me as a potential employee. I can display some of my projects, talk about the work I do, and get some info about my interests. I used LinkedIn for a long time, but sometime ~2015 I realized it was becoming less useful for actual employer networking or job-searching. I recently decided I didn't want to use their service any more, made this site, and took down my LinkedIn profile. Maybe sometime I'll write more in-depth about it, perhaps once I've been out of the service for a while.</p>
 <p>Anyway, that meant I'd need a proper <a href="https://www.ncfr.org/professional-resources/career-resources/general-career-resources/your-cv-it-vita-or-vitae">curriculum vitae</a>, or at least some written and preferably downloadable method for communicating details about my education, work experience, and qualifications. I had made a vita before, but I used Word and it showed. I knew a bit of LaTeX and I wanted to demonstrate what skills I had, plus maybe continue to work on them a bit, so I decided to make the entire CV with it.</p>
 <p>I knew that I wanted to use a pre-canned template, vowing that some day I would write my own, eventually landing on <a href="https://www.ctan.org/pkg/moderncv?lang=en">moderncv</a>. It looked relatively good for being a standardized template and seemed easy to use. Once you download it (manually, through either your TeX editor or, if you're using Linux, through Synaptic), call the template at the very top of your .tex document:</p>
-<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[11pt,a4paper]</span><span class="nb">{</span>moderncv<span class="nb">}</span>
+<div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[11pt,a4paper]</span><span class="nb">{</span>moderncv<span class="nb">}</span>
 </pre></div>
 
 
@@ -111,14 +111,14 @@ Applied Caffeine            </a>
 <p>This tutorial won't focus on using the package, because you can currently find some <a href="https://walrustech.wordpress.com/tag/template/">helpful</a> <a href="https://fredrikloch.me/post/using-moderncv/">content</a> out there on its use--not to mention the actual <a href="https://bazaar.launchpad.net/~xdanaux/moderncv/trunk/view/head:/examples/template.tex">template,</a> which includes an extensive system of very straightforward comments. I don't want to re-hash their work. What I will spend a bit on, though, are the little improvements I made on it.</p>
 <h3>Typesetting</h3>
 <p>I didn't like how the standard moderncv package rendered text, particularly because I didn't like how it handled kerning on larger-point fonts. I opted to use <a href="https://www.google.com/fonts/specimen/EB+Garamond#charset">EB Garamond</a>, an open-source incarnation of the Garamond typeface family. Installed through the <code>texlive-fonts-extra</code> Linux package, I enabled it with:</p>
-<div class="highlight"><pre>\usepackage{ebgaramond}
+<div class="highlight"><pre><span></span>\usepackage{ebgaramond}
 </pre></div>
 
 
 <p>I also made use of small capital letters throughout my vita, particularly for section and subsection headings, becuase I thought it added a nice touch and slightly improved readability for text-heavy sections. It can be safely used throughout the template by calling <code>\textsc{your text here}</code> anywhere you'd like to use it.</p>
 <h3>Relevant coursework bulleted items</h3>
 <p>After I listed out all of my coursework with <code>\cvline</code> entries and rendered it, I decided it left too much negative space on the page. Putting my courses in a bulleted format would be a more efficient approach. The code I used for that section can be seen here:</p>
-<div class="highlight"><pre>\section{\textsc{Relevant Coursework}}
+<div class="highlight"><pre><span></span>\section{\textsc{Relevant Coursework}}
 \hspace{6.4em}
 \begin{tabular}{p{.4\textwidth}p{.5\textwidth}}
     $\cdot$ Advanced Formal Methods Techniques &amp; $\cdot$ Human Factors Research Methodology\\
@@ -166,13 +166,8 @@ Applied Caffeine            </a>
             <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -186,8 +181,13 @@ Applied Caffeine            </a>
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
                         </a>
                     </li>
                     <li class="list-group-item tag-4">

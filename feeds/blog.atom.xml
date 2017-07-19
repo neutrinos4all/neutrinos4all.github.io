@@ -63,12 +63,12 @@
 &lt;li&gt;Debian 8.6 ("Jessie") &lt;a href="https://beagleboard.org/latest-images"&gt;IoT image&lt;/a&gt;, selected because it's a minimal installation that supports the BBB's onboard connectivity ports but eschews GUI elements (window managers, desktop environments, etc). Installed is only ~1.6gb.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I flashed the image to the onboard eMMC using &lt;a href="http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/"&gt;these instructions&lt;/a&gt;, rather than running it full-time from the SD card itself. During flashing, remember that the LEDs will light up in a pattern (1-2-3-4-3-2-1-2-3-4....) and then go all solid when complete; if you're having trouble flashing, navigate to &lt;code&gt;/boot/uEnv.txt&lt;/code&gt; on the SD card and &lt;em&gt;uncomment&lt;/em&gt; the following line:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;You will also want to modify the following line in that same file, changing &lt;strong&gt;enable&lt;/strong&gt; to &lt;strong&gt;disable&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cmdline=coherent_pool=1M quiet net.ifnames=0 cape_universal=disable
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cmdline=coherent_pool=1M quiet net.ifnames=0 cape_universal=disable
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -79,7 +79,7 @@
 &lt;p&gt;Since Pi-hole prefers &lt;a href="https://wiki.archlinux.org/index.php/dnsmasq"&gt;dnsmasq&lt;/a&gt; as the resolver program, I decided to look at its config file (found at &lt;code&gt;/etc/dnsmasq.conf&lt;/code&gt;) for obvious problems and check its syntax (&lt;code&gt;dnsmasq --test&lt;/code&gt;). Everything turned out fine and syntax was OK.&lt;/p&gt;
 &lt;p&gt;Next, I checked its status (&lt;code&gt;systemctl status dnsmasq.service&lt;/code&gt;) and got a &lt;strong&gt;failure.&lt;/strong&gt; However, it wasn't very verbose and only really gave me an "exit-code: 2" error. I then resorted to &lt;code&gt;sudo dnsmasq&lt;/code&gt; to check the output, and got in return: &lt;code&gt;dnsmasq: failed to create listening socket for port 53: Address already in use!&lt;/code&gt; This indicated that something was already bound to and listening on port 53, which was preventing dnsmasq from doing so and thereby disallowing DNS resolution.&lt;/p&gt;
 &lt;p&gt;To determine what it was, I asked for the list of programs listening to that port. Running &lt;code&gt;lsof +M -nPi :53&lt;/code&gt; gave me:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 connmand 3825    root   4u   IPv4 165918      0t0  UDP * :53
 connmand 3825    root   5u   IPv4 165919      0t0  TCP * :53 (LISTEN)
 connmand 3825    root   6u   IPv6 165920      0t0  UDP * :53
@@ -94,7 +94,7 @@ connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
 &lt;h3&gt;Second task: Uninstalling node.js to free port 80&lt;/h3&gt;
 &lt;p&gt;The second thing I encountered, after getting the DNS resolution to work and checking from the command line that Pi-hole was working, was an inability to access the web interface to manage. Typing &lt;code&gt;http://type.your.pihole.ip/admin/&lt;/code&gt; into your browser's URL bar should take you to a nifty little web interface, and from here you can see stats about ads blocked, DNS queries forwarded, etc. It's not necessary for a fully functional Pi-hole, but it's fun and I couldn't access it.&lt;/p&gt;
 &lt;p&gt;The browser gave some HTML that said "Couldn't GET /admin/," so because the GET request was failing I thought that the HTTP content needed by the web interface couldn't be retrieved over port 80. I used the same &lt;code&gt;lsof&lt;/code&gt; trick used above, but this time substituted port 80 for 53:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt; COMMAND   PID     USER    FD  TYPE   DEVICE SIZE/OFF  NODE NAME
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; COMMAND   PID     USER    FD  TYPE   DEVICE SIZE/OFF  NODE NAME
  nodejs   1214 www-data    5u  IPv4   17813       0t0  TCP * :80 (LISTEN)
  nodejs   1214 www-data    6u  IPv6   17814       0t0  TCP * :80 (LISTEN)
 &lt;/pre&gt;&lt;/div&gt;
@@ -161,8 +161,8 @@ connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
 &lt;li&gt;
 &lt;p&gt;For each parameter that you've decided to tune, copy only the command and paste it into the file you created.&lt;/p&gt;
 &lt;p&gt;Once you're done, it will probably look similar to this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env bash&lt;/span&gt;
-iw dev wlan0 &lt;span class="nb"&gt;set &lt;/span&gt;power_save off
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
+iw dev wlan0 &lt;span class="nb"&gt;set&lt;/span&gt; power_save off
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;min_power&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class="s1"&gt;&amp;#39;/sys/class/scsi_host/host0/link_power_management_policy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class="s1"&gt;&amp;#39;/proc/sys/kernel/nmi_watchdog&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1500&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class="s1"&gt;&amp;#39;/proc/sys/vm/dirty_writeback_centisecs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -195,38 +195,38 @@ ethtool -s eth0 wol d&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;li&gt;
 &lt;p&gt;Once all of the desired commands have been copied over and the file is saved, find and edit &lt;code&gt;/etc/rc.local&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;It should already have something like this in the file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh -e&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# rc.local&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# This script is executed at the end of each multiuser runlevel.&lt;/span&gt;
-&lt;span class="c"&gt;# Make sure that the script will &amp;quot;exit 0&amp;quot; on success or any other&lt;/span&gt;
-&lt;span class="c"&gt;# value on error.&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# In order to enable or disable this script just change the execution&lt;/span&gt;
-&lt;span class="c"&gt;# bits.&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# By default this script does nothing.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh -e&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# rc.local&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# This script is executed at the end of each multiuser runlevel.&lt;/span&gt;
+&lt;span class="c1"&gt;# Make sure that the script will &amp;quot;exit 0&amp;quot; on success or any other&lt;/span&gt;
+&lt;span class="c1"&gt;# value on error.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# In order to enable or disable this script just change the execution&lt;/span&gt;
+&lt;span class="c1"&gt;# bits.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# By default this script does nothing.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Directly below the lines that have been commented out, add the script you just created to &lt;code&gt;rc.local&lt;/code&gt;. It should now look like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh -e&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# rc.local&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# This script is executed at the end of each multiuser runlevel.&lt;/span&gt;
-&lt;span class="c"&gt;# Make sure that the script will &amp;quot;exit 0&amp;quot; on success or any other&lt;/span&gt;
-&lt;span class="c"&gt;# value on error.&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# In order to enable or disable this script just change the execution&lt;/span&gt;
-&lt;span class="c"&gt;# bits.&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# By default this script does nothing.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh -e&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# rc.local&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# This script is executed at the end of each multiuser runlevel.&lt;/span&gt;
+&lt;span class="c1"&gt;# Make sure that the script will &amp;quot;exit 0&amp;quot; on success or any other&lt;/span&gt;
+&lt;span class="c1"&gt;# value on error.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# In order to enable or disable this script just change the execution&lt;/span&gt;
+&lt;span class="c1"&gt;# bits.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# By default this script does nothing.&lt;/span&gt;
 
 /usr/local/bin/powertop.sh
 
-&lt;span class="nb"&gt;exit &lt;/span&gt;0
+&lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -243,7 +243,7 @@ ethtool -s eth0 wol d&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;li&gt;
 &lt;p&gt;Rather than manually copying and pasting the tuning commands into the file, instead replace it with the auto-tune command.&lt;/p&gt;
 &lt;p&gt;It should look like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
 powertop --auto-tune
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -350,7 +350,7 @@ I changed the grind size from 11/16 to 13/16, and I think the brew is a bit ligh
 I finished the roast, so my final verdict is a 13/16 grind size and a 45s bloom time. I thought it produced the brightest cup without being overwhelming or reinviting that astringent mouthfeel back I got with my first few brews.&lt;/p&gt;</content><category term="coffee"></category></entry><entry><title>Making a vita with LaTeX</title><link href="https://appliedcaffeine.org/latexvita.html" rel="alternate"></link><published>2016-04-05T00:00:00-04:00</published><updated>2016-04-05T00:00:00-04:00</updated><author><name>Adam Houser</name></author><id>tag:appliedcaffeine.org,2016-04-05:/latexvita.html</id><summary type="html">&lt;p&gt;For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have to admit, one of the principal reasons for building the site is to have a personalized space on the &lt;a href="http://www.theverge.com/2016/4/2/11352744/ap-style-guide-will-no-longer-capitalize-internet"&gt;internet&lt;/a&gt; that people (and potential employers) can use to get a sense of me as a potential employee. I can display some of my projects, talk about the work I do, and get some info about my interests. I used LinkedIn for a long time, but sometime ~2015 I realized it was becoming less useful for actual employer networking or job-searching. I recently decided I didn't want to use their service any more, made this site, and took down my LinkedIn profile. Maybe sometime I'll write more in-depth about it, perhaps once I've been out of the service for a while.&lt;/p&gt;
 &lt;p&gt;Anyway, that meant I'd need a proper &lt;a href="https://www.ncfr.org/professional-resources/career-resources/general-career-resources/your-cv-it-vita-or-vitae"&gt;curriculum vitae&lt;/a&gt;, or at least some written and preferably downloadable method for communicating details about my education, work experience, and qualifications. I had made a vita before, but I used Word and it showed. I knew a bit of LaTeX and I wanted to demonstrate what skills I had, plus maybe continue to work on them a bit, so I decided to make the entire CV with it.&lt;/p&gt;
 &lt;p&gt;I knew that I wanted to use a pre-canned template, vowing that some day I would write my own, eventually landing on &lt;a href="https://www.ctan.org/pkg/moderncv?lang=en"&gt;moderncv&lt;/a&gt;. It looked relatively good for being a standardized template and seemed easy to use. Once you download it (manually, through either your TeX editor or, if you're using Linux, through Synaptic), call the template at the very top of your .tex document:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;\documentclass&lt;/span&gt;&lt;span class="na"&gt;[11pt,a4paper]&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;moderncv&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;\documentclass&lt;/span&gt;&lt;span class="na"&gt;[11pt,a4paper]&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;moderncv&lt;span class="nb"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -358,14 +358,14 @@ I finished the roast, so my final verdict is a 13/16 grind size and a 45s bloom 
 &lt;p&gt;This tutorial won't focus on using the package, because you can currently find some &lt;a href="https://walrustech.wordpress.com/tag/template/"&gt;helpful&lt;/a&gt; &lt;a href="https://fredrikloch.me/post/using-moderncv/"&gt;content&lt;/a&gt; out there on its use--not to mention the actual &lt;a href="https://bazaar.launchpad.net/~xdanaux/moderncv/trunk/view/head:/examples/template.tex"&gt;template,&lt;/a&gt; which includes an extensive system of very straightforward comments. I don't want to re-hash their work. What I will spend a bit on, though, are the little improvements I made on it.&lt;/p&gt;
 &lt;h3&gt;Typesetting&lt;/h3&gt;
 &lt;p&gt;I didn't like how the standard moderncv package rendered text, particularly because I didn't like how it handled kerning on larger-point fonts. I opted to use &lt;a href="https://www.google.com/fonts/specimen/EB+Garamond#charset"&gt;EB Garamond&lt;/a&gt;, an open-source incarnation of the Garamond typeface family. Installed through the &lt;code&gt;texlive-fonts-extra&lt;/code&gt; Linux package, I enabled it with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;\usepackage{ebgaramond}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;\usepackage{ebgaramond}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I also made use of small capital letters throughout my vita, particularly for section and subsection headings, becuase I thought it added a nice touch and slightly improved readability for text-heavy sections. It can be safely used throughout the template by calling &lt;code&gt;\textsc{your text here}&lt;/code&gt; anywhere you'd like to use it.&lt;/p&gt;
 &lt;h3&gt;Relevant coursework bulleted items&lt;/h3&gt;
 &lt;p&gt;After I listed out all of my coursework with &lt;code&gt;\cvline&lt;/code&gt; entries and rendered it, I decided it left too much negative space on the page. Putting my courses in a bulleted format would be a more efficient approach. The code I used for that section can be seen here:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;\section{\textsc{Relevant Coursework}}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;\section{\textsc{Relevant Coursework}}
 \hspace{6.4em}
 \begin{tabular}{p{.4\textwidth}p{.5\textwidth}}
     $\cdot$ Advanced Formal Methods Techniques &amp;amp; $\cdot$ Human Factors Research Methodology\\
@@ -397,7 +397,7 @@ I finished the roast, so my final verdict is a 13/16 grind size and a 45s bloom 
 &lt;li&gt;My CV&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I whipped up a few entries in Markdown, and I was a little worried because the .md format requires you to include some metadata (of which only the &lt;code&gt;Title&lt;/code&gt; and &lt;code&gt;Date&lt;/code&gt; are actually required, but the rest provides useful hooks for additional theme functionality):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Sample&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Sample&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;
 &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1901&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mo"&gt;01&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mo"&gt;01&lt;/span&gt;
 &lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;blog&lt;/span&gt;
 &lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;
@@ -410,8 +410,8 @@ I finished the roast, so my final verdict is a 13/16 grind size and a 45s bloom 
 &lt;p&gt;The solution is the distinction between &lt;em&gt;articles&lt;/em&gt; and &lt;em&gt;pages&lt;/em&gt;, which you can find in the documentation &lt;a href="http://docs.getpelican.com/en/3.6.3/content.html"&gt;here&lt;/a&gt;. I ended up creating two folders inside my content directory: &lt;code&gt;blogroll&lt;/code&gt; and &lt;code&gt;pages&lt;/code&gt;, and I'll save the corresponding files in their appropriate directory. When writing a page, you'll notice that you only need a &lt;code&gt;Title&lt;/code&gt; entry at the top of the file, and it won't require any date information. It also slightly changes that page's header format. Rebuilding your site will also automatically put your pages in as menu items, using the title as the item name.&lt;/p&gt;
 &lt;p&gt;Finally, I wanted to add a link at the top of the page that would provide a link to my email address. My reasons here were two-fold: I didn't want my email plastered in plaintext on a page to make it harder for spambot crawlers to find my email address, and I wanted it somewhere immediately visible from the site index. Since I wanted my index to arrive at my blogroll (the default Pelican behavior), I decided to use reCAPTCHA's &lt;a href="https://www.google.com/recaptcha/admin#mailhide"&gt;MailHide&lt;/a&gt; on the other side of a link. However, at this point I was only adding links to the menu through either page titles or article categories. That behavior wouldn't work here, because I didn't want to make a document with a link to my email's reCAPTCHA inside; I wanted to link it directly to the reCAPTCHA, so when you clicked on the "Email" item in the menu it took you right there.&lt;/p&gt;
 &lt;p&gt;My solution was to add an entry in my &lt;code&gt;pelicanconf.py&lt;/code&gt; file called &lt;code&gt;MENUITEMS&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://www.google.com/recaptcha/mailhide/d?...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://www.google.com/recaptcha/mailhide/d?...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -420,14 +420,14 @@ I finished the roast, so my final verdict is a 13/16 grind size and a 45s bloom 
 &lt;h3&gt;Navbar organization&lt;/h3&gt;
 &lt;p&gt;The last thing you'll notice is that the menu items in the navbar are inserted alphabetically according to type: manually-placed menu items first, pages second, then articles third. It also doesn't capitalize words beyond the first if you have multiple-word page titles or article categories. At this point, my navbar wasn't really adhering to the layout I desired, and I wanted to change that.&lt;/p&gt;
 &lt;p&gt;Some searching revealed that Pelican includes some &lt;a href="http://docs.getpelican.com/en/3.6.3/settings.html"&gt;settings&lt;/a&gt; that allow you to change this default organizational behavior, and you should spend some time looking through that list and seeing what you can change by adding those lines to &lt;code&gt;pelicanconf.py&lt;/code&gt;. I decided to arrange my menu item order manually, rather than allowing Pelican to do it for me. The following changes to my config file enabled it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;DISPLAY_CATEGORIES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DISPLAY_CATEGORIES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
 &lt;span class="n"&gt;DISPLAY_PAGES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
 
 &lt;span class="n"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;About&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/pages/about.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Blog&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/category/blog.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://www.google.com/recaptcha/mailhide/d?...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Vita&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/pdfs/HouserCV.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;About&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pages/about.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Blog&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/category/blog.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Email&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://www.google.com/recaptcha/mailhide/d?...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Vita&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/pdfs/HouserCV.pdf&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 

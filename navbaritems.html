@@ -110,7 +110,7 @@ Applied Caffeine            </a>
 <li>My CV</li>
 </ul>
 <p>I whipped up a few entries in Markdown, and I was a little worried because the .md format requires you to include some metadata (of which only the <code>Title</code> and <code>Date</code> are actually required, but the rest provides useful hooks for additional theme functionality):</p>
-<div class="highlight"><pre><span class="n">Title</span><span class="p">:</span> <span class="n">Sample</span> <span class="n">blog</span> <span class="n">post</span>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="p">:</span> <span class="n">Sample</span> <span class="n">blog</span> <span class="n">post</span>
 <span class="n">Date</span><span class="p">:</span> <span class="mi">1901</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span>
 <span class="n">Category</span><span class="p">:</span> <span class="n">blog</span>
 <span class="n">Slug</span><span class="p">:</span> <span class="n">sample</span>
@@ -123,8 +123,8 @@ Applied Caffeine            </a>
 <p>The solution is the distinction between <em>articles</em> and <em>pages</em>, which you can find in the documentation <a href="http://docs.getpelican.com/en/3.6.3/content.html">here</a>. I ended up creating two folders inside my content directory: <code>blogroll</code> and <code>pages</code>, and I'll save the corresponding files in their appropriate directory. When writing a page, you'll notice that you only need a <code>Title</code> entry at the top of the file, and it won't require any date information. It also slightly changes that page's header format. Rebuilding your site will also automatically put your pages in as menu items, using the title as the item name.</p>
 <p>Finally, I wanted to add a link at the top of the page that would provide a link to my email address. My reasons here were two-fold: I didn't want my email plastered in plaintext on a page to make it harder for spambot crawlers to find my email address, and I wanted it somewhere immediately visible from the site index. Since I wanted my index to arrive at my blogroll (the default Pelican behavior), I decided to use reCAPTCHA's <a href="https://www.google.com/recaptcha/admin#mailhide">MailHide</a> on the other side of a link. However, at this point I was only adding links to the menu through either page titles or article categories. That behavior wouldn't work here, because I didn't want to make a document with a link to my email's reCAPTCHA inside; I wanted to link it directly to the reCAPTCHA, so when you clicked on the "Email" item in the menu it took you right there.</p>
 <p>My solution was to add an entry in my <code>pelicanconf.py</code> file called <code>MENUITEMS</code>:</p>
-<div class="highlight"><pre><span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
-<span class="p">(</span><span class="s">&#39;Email&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -133,14 +133,14 @@ Applied Caffeine            </a>
 <h3>Navbar organization</h3>
 <p>The last thing you'll notice is that the menu items in the navbar are inserted alphabetically according to type: manually-placed menu items first, pages second, then articles third. It also doesn't capitalize words beyond the first if you have multiple-word page titles or article categories. At this point, my navbar wasn't really adhering to the layout I desired, and I wanted to change that.</p>
 <p>Some searching revealed that Pelican includes some <a href="http://docs.getpelican.com/en/3.6.3/settings.html">settings</a> that allow you to change this default organizational behavior, and you should spend some time looking through that list and seeing what you can change by adding those lines to <code>pelicanconf.py</code>. I decided to arrange my menu item order manually, rather than allowing Pelican to do it for me. The following changes to my config file enabled it:</p>
-<div class="highlight"><pre><span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<div class="highlight"><pre><span></span><span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="s">&#39;About&#39;</span><span class="p">,</span> <span class="s">&#39;/pages/about.html&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">&#39;Blog&#39;</span><span class="p">,</span> <span class="s">&#39;/category/blog.html&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">&#39;Email&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">&#39;Vita&#39;</span><span class="p">,</span> <span class="s">&#39;/pdfs/HouserCV.pdf&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="s1">&#39;About&#39;</span><span class="p">,</span> <span class="s1">&#39;/pages/about.html&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Blog&#39;</span><span class="p">,</span> <span class="s1">&#39;/category/blog.html&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Vita&#39;</span><span class="p">,</span> <span class="s1">&#39;/pdfs/HouserCV.pdf&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 </pre></div>
 
@@ -179,13 +179,8 @@ Applied Caffeine            </a>
             <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
+                        <a href="https://appliedcaffeine.org/tag/opinion.html">
+                            opinion
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -199,8 +194,13 @@ Applied Caffeine            </a>
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
+                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://appliedcaffeine.org/tag/coffee.html">
+                            coffee
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
