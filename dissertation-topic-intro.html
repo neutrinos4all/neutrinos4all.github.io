@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Finding unanticipated cybersecurity consequences of human-computer interaction - Applied Caffeine</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/dissertation-topic-intro.html">
+
+        <meta name="author" content="Adam Houser" />
+        <meta name="keywords" content="human factors,dissertation,cybersecurity" />
+        <meta name="description" content="For my dissertation, I&#39;m arguing that we should be able to leverage techniques from formal methods, human performance modeling, and systems engineering analysis to help us computationally find unanticipated problems in computer security. But what does that mean and why does it matter?" />
+
+        <meta property="og:site_name" content="Applied Caffeine" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Finding unanticipated cybersecurity consequences of human-computer interaction"/>
+        <meta property="og:url" content="/dissertation-topic-intro.html"/>
+        <meta property="og:description" content="For my dissertation, I&#39;m arguing that we should be able to leverage techniques from formal methods, human performance modeling, and systems engineering analysis to help us computationally find unanticipated problems in computer security. But what does that mean and why does it matter?"/>
+        <meta property="article:published_time" content="2017-08-07" />
+            <meta property="article:section" content="blog" />
+            <meta property="article:tag" content="human factors" />
+            <meta property="article:tag" content="dissertation" />
+            <meta property="article:tag" content="cybersecurity" />
+            <meta property="article:author" content="Adam Houser" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Applied Caffeine            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="http://www.google.com/recaptcha/mailhide/d?k=01tbzD4xfy4JhpJBPyhOMiIA==&c=OlheiSl4NgBb6mWA7EtUWTORPle6sjEXWB0ttpiPDW0=">Email...</a></li>
+                    <li><a href="https://pgp.mit.edu/pks/lookup?op=get&search=0xC37BE58D57EBB76B">...and its PGP Key</a></li>
+                    <li><a href="/category/blog.html">Blog</a></li>
+                    <li><a href="/docs/HouserCV.pdf">Curriculum Vitae</a></li>
+                    <li><a href="/pages/publications.html">Publications</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/dissertation-topic-intro.html"
+                       rel="bookmark"
+                       title="Permalink to Finding unanticipated cybersecurity consequences of human-computer interaction">
+                        Finding unanticipated cybersecurity consequences of human-computer interaction
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-07T00:00:00-04:00"> Mon 07 August 2017</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/human-factors.html">human factors</a>
+        /
+	<a href="/tag/dissertation.html">dissertation</a>
+        /
+	<a href="/tag/cybersecurity.html">cybersecurity</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Imagine that you're a new employee at some company (any company, really) and you get a lot of emails a day. Some are important, but most are threads you've been CC'ed on because someone thought they would be helpful for you. The IT department set up your email client with the read pane disabled; that is, there was no permanently present space that would show you an email as soon as you clicked on it. Rather, you had to double-click the email if you wanted to read it, and it would open the email in a new window.</p>
+<p><em>What a pain. It takes so long just to get through this daily barrage. If only I could do it faster...</em></p>
+<p>It would be super useful if you could just enable the read pane, then 'down arrow' quickly through your inbox. Select an email, open it, visually scan it, and move on. No more double-click, read, click to close, double-click, read ... what a timesaver! It's such a small change, so you just go ahead and enable the read pane in your email client settings. Instant productivity improvement.</p>
+<p><em>This is awesome.</em></p>
+<p>After a few weeks, someone from the IT department brings you in for a sit-down. Several machines at the company had recently been hit by a malware attack, and its point of origin was your computer. As the IT person asks you about this incident, we can imagine that it might go like this:</p>
+<p>IT: "Do you remember getting any suspicious emails within the past few days?"<br>
+You: "Hmm, maybe. I mean I get a lot of emails, and I can't remember everything I click on...."<br>
+IT: "You mean you click on things without reading what it is?"<br>
+You: "Well sometimes a lot of them are crap, so I just blow through them using the down arrow. And I always make sure I don't click on anything that looks dangerous, like we were trained to do when I got here."<br>
+IT: "Wait a minute, down arrow? What down arrow? How do you read your email?"<br>
+You: "With the read pane. I set it up so that I can see all my emails without having to double-click on each one of them...."<br>
+IT: "You <em>what?</em> We set it up to be disabled for a reason! Why would you do that?"<br>
+You: "I don't know, because I wanted to save time and be more productive! I thought I was doing a good thing! Nobody said anything about that in training, and if I didn't click on something dangerous I'm not sure how I got hacked."<br>
+IT: "Look, Ms. Smith, we do things the way we do them for a reason. Don't change them. And you can download malware just by opening a bad email, you don't have to click on anything. I'm going to have to tell my boss about this...."  </p>
+<h3>System failure: Cascades of smaller, seemingly innocuous events</h3>
+<p>In my <a href="https://appliedcaffeine.org/wcry-and-legacy-software.html">last post</a>, I argued that most complex systems failures can often be attributed to a cascade of system events that, on their own, probably seem innocuous or minor. Charles Perrow's <a href="https://www.amazon.com/Normal-Accidents-Living-High-Risk-Technologies/dp/0691004129">Normal Accidents</a> and James Reason's <a href="https://en.wikipedia.org/wiki/Swiss_cheese_model">swiss cheese model</a> of accident causation are pretty helpful here. This same thinking can be applied here to our toy email security scenario. Looking through it again, consider the potential problems that aligned and resulted in malware infection:</p>
+<ul>
+<li>New employee cybersecurity training only addressed phishing and attacks dependent on user clicks, rather than passive attack strategies;  </li>
+<li>New employee was "thrown the kitchen sink" with company communication obligations;  </li>
+<li>Email client default settings were not explained to the new employee;  </li>
+<li>IT team allowed a potentially dangerous setting to remain user-configurable.  </li>
+</ul>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="images/adam_reduced.jpg"/>
+        </p>
+    <p>
+        <strong>About Adam Houser</strong><br/>
+        Human factors, mental models, formal methods, cybersecurity, coffee.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/human-factors.html">
+                            human factors
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/cybersecurity.html">
+                            cybersecurity
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/tutorials.html">
+                            tutorials
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/coffee.html">
+                            coffee
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/opinion.html">
+                            opinion
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/systems-engineering.html">
+                            systems engineering
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/dissertation.html">
+                            dissertation
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="https://twitter.com/neutrinos4all" target="_blank">
+                Twitter
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://github.com/neutrinos4all" target="_blank">
+                Github
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://keybase.io/adamhouser" target="_blank">
+                Keybase.io
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://www.linkedin.com/in/neutrinos4all" target="_blank">
+                LinkedIn
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">
+                Google Scholar
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://fhsl.eng.buffalo.edu" target="_blank">
+                Formal Human Systems Lab
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">
+            This static site is generated with <a href="https://docs.getpelican.com/" target="_blank">Pelican</a>, utilizes the <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a> theme, and proudly supports open-source software.              <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
