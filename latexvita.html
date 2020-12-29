@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
     <title>Making a vita with LaTeX - Applied Caffeine</title>
     <!-- Using the latest rendering mode for IE -->
@@ -27,6 +26,7 @@
             <meta property="article:author" content="Adam Houser" />
 
 
+
     <!-- Bootstrap -->
         <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/bootstrap.min.css" type="text/css"/>
     <link href="https://appliedcaffeine.org/theme/css/font-awesome.min.css" rel="stylesheet">
@@ -37,11 +37,13 @@
         <link href="https://appliedcaffeine.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Applied Caffeine ATOM Feed"/>
 
+        <link href="https://appliedcaffeine.org/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Applied Caffeine blog ATOM Feed"/>
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -58,20 +60,24 @@ Applied Caffeine            </a>
                     <li><a href="/category/blog.html">Blog</a></li>
                     <li><a href="/pages/publications.html">Publications</a></li>
                     <li><a href="/docs/HouserCV.pdf">Curriculum Vitae</a></li>
+                         <li><a href="https://appliedcaffeine.org/pages/publications.html">
+                             Publications
+                          </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="https://appliedcaffeine.org/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-
     <section id="content">
         <article>
             <header class="page-header">
@@ -94,6 +100,8 @@ Applied Caffeine            </a>
 
 
 
+
+
 <span class="label label-default">Tags</span>
 	<a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
     
@@ -102,34 +110,31 @@ Applied Caffeine            </a>
                 <p>I have to admit, one of the principal reasons for building the site is to have a personalized space on the <a href="http://www.theverge.com/2016/4/2/11352744/ap-style-guide-will-no-longer-capitalize-internet">internet</a> that people (and potential employers) can use to get a sense of me as a potential employee. I can display some of my projects, talk about the work I do, and get some info about my interests. I used LinkedIn for a long time, but sometime ~2015 I realized it was becoming less useful for actual employer networking or job-searching. I recently decided I didn't want to use their service any more, made this site, and took down my LinkedIn profile. Maybe sometime I'll write more in-depth about it, perhaps once I've been out of the service for a while.</p>
 <p>Anyway, that meant I'd need a proper <a href="https://www.ncfr.org/professional-resources/career-resources/general-career-resources/your-cv-it-vita-or-vitae">curriculum vitae</a>, or at least some written and preferably downloadable method for communicating details about my education, work experience, and qualifications. I had made a vita before, but I used Word and it showed. I knew a bit of LaTeX and I wanted to demonstrate what skills I had, plus maybe continue to work on them a bit, so I decided to make the entire CV with it.</p>
 <p>I knew that I wanted to use a pre-canned template, vowing that some day I would write my own, eventually landing on <a href="https://www.ctan.org/pkg/moderncv?lang=en">moderncv</a>. It looked relatively good for being a standardized template and seemed easy to use. Once you download it (manually, through either your TeX editor or, if you're using Linux, through Synaptic), call the template at the very top of your .tex document:</p>
-<div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[11pt,a4paper]</span><span class="nb">{</span>moderncv<span class="nb">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">\documentclass</span><span class="na">[11pt,a4paper]</span><span class="nb">{</span>moderncv<span class="nb">}</span>
+</code></pre></div>
 
 <p>and you're off and running.</p>
 <p>This tutorial won't focus on using the package, because you can currently find some <a href="https://walrustech.wordpress.com/tag/template/">helpful</a> <a href="https://fredrikloch.me/post/using-moderncv/">content</a> out there on its use--not to mention the actual <a href="https://bazaar.launchpad.net/~xdanaux/moderncv/trunk/view/head:/examples/template.tex">template,</a> which includes an extensive system of very straightforward comments. I don't want to re-hash their work. What I will spend a bit on, though, are the little improvements I made on it.</p>
 <h3>Typesetting</h3>
 <p>I didn't like how the standard moderncv package rendered text, particularly because I didn't like how it handled kerning on larger-point fonts. I opted to use <a href="https://www.google.com/fonts/specimen/EB+Garamond#charset">EB Garamond</a>, an open-source incarnation of the Garamond typeface family. Installed through the <code>texlive-fonts-extra</code> Linux package, I enabled it with:</p>
-<div class="highlight"><pre><span></span>\usepackage{ebgaramond}
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">\usepackage{ebgaramond}</span>
+</code></pre></div>
 
 <p>I also made use of small capital letters throughout my vita, particularly for section and subsection headings, becuase I thought it added a nice touch and slightly improved readability for text-heavy sections. It can be safely used throughout the template by calling <code>\textsc{your text here}</code> anywhere you'd like to use it.</p>
 <h3>Relevant coursework bulleted items</h3>
 <p>After I listed out all of my coursework with <code>\cvline</code> entries and rendered it, I decided it left too much negative space on the page. Putting my courses in a bulleted format would be a more efficient approach. The code I used for that section can be seen here:</p>
-<div class="highlight"><pre><span></span>\section{\textsc{Relevant Coursework}}
-\hspace{6.4em}
-\begin{tabular}{p{.4\textwidth}p{.5\textwidth}}
-    $\cdot$ Advanced Formal Methods Techniques &amp; $\cdot$ Human Factors Research Methodology\\
-    $\cdot$ Cognitive Engineering &amp; $\cdot$ Human Information Processing\\
-    $\cdot$ Cognitive Processes &amp; $\cdot$ Industrial Hygiene\\
-    $\cdot$ Design and Analysis of Experiments &amp; $\cdot$ Java Programming I\\
-    $\cdot$ Formal Methods in Human Factors &amp; $\cdot$ Ontology Engineering\\
-    $\cdot$ Home Health Innovations &amp; $\cdot$ Sensing Realities\\
-    $\cdot$ Human-Computer Interaction &amp; $\cdot$ Safety in Human Factors\\
-\end{tabular}
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="err">\section{\textsc{Relevant Coursework}}</span>
+<span class="err">\hspace{6.4em}</span>
+<span class="err">\begin{tabular}{p{.4\textwidth}p{.5\textwidth}}</span>
+<span class="err">    $\cdot$ Advanced Formal Methods Techniques &amp; $\cdot$ Human Factors Research Methodology\\</span>
+<span class="err">    $\cdot$ Cognitive Engineering &amp; $\cdot$ Human Information Processing\\</span>
+<span class="err">    $\cdot$ Cognitive Processes &amp; $\cdot$ Industrial Hygiene\\</span>
+<span class="err">    $\cdot$ Design and Analysis of Experiments &amp; $\cdot$ Java Programming I\\</span>
+<span class="err">    $\cdot$ Formal Methods in Human Factors &amp; $\cdot$ Ontology Engineering\\</span>
+<span class="err">    $\cdot$ Home Health Innovations &amp; $\cdot$ Sensing Realities\\</span>
+<span class="err">    $\cdot$ Human-Computer Interaction &amp; $\cdot$ Safety in Human Factors\\</span>
+<span class="err">\end{tabular}</span>
+</code></pre></div>
 
 <p>It may take some custom tinkering on your part, but I'll provide a bit of explanation for the included commands:</p>
 <ul>
@@ -150,105 +155,91 @@ Applied Caffeine            </a>
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="images/adam_reduced.jpg"/>
+            <img width="100%" class="img-thumbnail" src="https://appliedcaffeine.org/images/adam2.jpg"/>
         </p>
     <p>
-        <strong>About Adam Houser</strong><br/>
-        Human factors, mental models, formal methods, cybersecurity, coffee.
+      <strong>About Adam Houser</strong><br/>
+        This blog used to be about coffee.
     </p>
-</div>
+</div><!-- Sidebar -->
 <section class="well well-sm">
-    <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush">
 
-
-
-            <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-0">
-                        <a href="https://appliedcaffeine.org/tag/human-factors.html">
-                            human factors
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/cybersecurity.html">
-                            cybersecurity
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="https://appliedcaffeine.org/tag/dissertation.html">
-                            dissertation
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="https://appliedcaffeine.org/tag/systems-engineering.html">
-                            systems engineering
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="https://twitter.com/neutrinos4all" target="_blank">
-                Twitter
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/neutrinos4all" target="_blank">
-                Github
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://keybase.io/adamhouser" target="_blank">
-                Keybase.io
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://www.linkedin.com/in/neutrinos4all" target="_blank">
-                LinkedIn
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">
-                Google Scholar
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://fhsl.eng.buffalo.edu" target="_blank">
-                Formal Human Systems Lab
-            </a>
-        </li>
-      </ul>
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-0">
+      <a href="https://appliedcaffeine.org/tag/human-factors.html">human factors</a>
     </li>
-    </ul>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/cybersecurity.html">cybersecurity</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/opinion.html">opinion</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://appliedcaffeine.org/tag/coffee.html">coffee</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://appliedcaffeine.org/tag/dissertation.html">dissertation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://appliedcaffeine.org/tag/miscellaneous.html">miscellaneous</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://appliedcaffeine.org/tag/systems-engineering.html">systems engineering</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://twitter.com/neutrinos4all" target="_blank">Twitter</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://github.com/neutrinos4all" target="_blank">Github</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://keybase.io/adamhouser" target="_blank">Keybase.io</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://www.linkedin.com/in/neutrinos4all" target="_blank">LinkedIn</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">Google Scholar</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://fhsl.eng.buffalo.edu" target="_blank">Formal Human Systems Lab</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
 </section>
-            </aside>
+<!-- End Sidebar -->            </aside>
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">
-            This static site is generated with <a href="https://docs.getpelican.com/" target="_blank">Pelican</a>, utilizes the <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a> theme, and proudly supports open-source software.              <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+         <div class="col-xs-10">&copy; 2021 Adam Houser
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>, and
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
     Content
-  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
 </small></p>
          </div>
          <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
@@ -262,6 +253,8 @@ Applied Caffeine            </a>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="https://appliedcaffeine.org/theme/js/respond.min.js"></script>
+
+
 
 
 </body>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
     <title>Pelican navbar menu items - Applied Caffeine</title>
     <!-- Using the latest rendering mode for IE -->
@@ -27,6 +26,7 @@
             <meta property="article:author" content="Adam Houser" />
 
 
+
     <!-- Bootstrap -->
         <link rel="stylesheet" href="https://appliedcaffeine.org/theme/css/bootstrap.min.css" type="text/css"/>
     <link href="https://appliedcaffeine.org/theme/css/font-awesome.min.css" rel="stylesheet">
@@ -37,11 +37,13 @@
         <link href="https://appliedcaffeine.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Applied Caffeine ATOM Feed"/>
 
+        <link href="https://appliedcaffeine.org/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Applied Caffeine blog ATOM Feed"/>
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -58,20 +60,24 @@ Applied Caffeine            </a>
                     <li><a href="/category/blog.html">Blog</a></li>
                     <li><a href="/pages/publications.html">Publications</a></li>
                     <li><a href="/docs/HouserCV.pdf">Curriculum Vitae</a></li>
+                         <li><a href="https://appliedcaffeine.org/pages/publications.html">
+                             Publications
+                          </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="https://appliedcaffeine.org/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-
     <section id="content">
         <article>
             <header class="page-header">
@@ -94,6 +100,8 @@ Applied Caffeine            </a>
 
 
 
+
+
 <span class="label label-default">Tags</span>
 	<a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
     
@@ -109,31 +117,29 @@ Applied Caffeine            </a>
 <li>My CV</li>
 </ul>
 <p>I whipped up a few entries in Markdown, and I was a little worried because the .md format requires you to include some metadata (of which only the <code>Title</code> and <code>Date</code> are actually required, but the rest provides useful hooks for additional theme functionality):</p>
-<div class="highlight"><pre><span></span><span class="n">Title</span><span class="p">:</span> <span class="n">Sample</span> <span class="n">blog</span> <span class="n">post</span>
-<span class="n">Date</span><span class="p">:</span> <span class="mi">1901</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span>
+<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="p">:</span> <span class="n">Sample</span> <span class="n">blog</span> <span class="n">post</span>
+<span class="n">Date</span><span class="p">:</span> <span class="mi">1901</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
 <span class="n">Category</span><span class="p">:</span> <span class="n">blog</span>
 <span class="n">Slug</span><span class="p">:</span> <span class="n">sample</span>
 <span class="n">Tags</span><span class="p">:</span> <span class="n">tag1</span><span class="p">,</span> <span class="n">tag2</span><span class="p">,</span> <span class="n">tag3</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>When I finished my first blog post and built the site on localhost (<code>fab build</code>, then <code>fab serve</code>), the theme automatically uses the "Category" metadata entry as the link under which it'll appear as a menu item in the navbar. Great! It worked basically out of the box.</p>
 <p>However, when I wrote my bio page and used "About" as the Category, the page was put under its own menu item but it included the <code>Date</code> metadata and formatted the page header like a blog post. That's not what I wanted for the bio page, which would be static and therefore shouldn't really have a posting date.</p>
 <p>The solution is the distinction between <em>articles</em> and <em>pages</em>, which you can find in the documentation <a href="http://docs.getpelican.com/en/3.6.3/content.html">here</a>. I ended up creating two folders inside my content directory: <code>blogroll</code> and <code>pages</code>, and I'll save the corresponding files in their appropriate directory. When writing a page, you'll notice that you only need a <code>Title</code> entry at the top of the file, and it won't require any date information. It also slightly changes that page's header format. Rebuilding your site will also automatically put your pages in as menu items, using the title as the item name.</p>
 <p>Finally, I wanted to add a link at the top of the page that would provide a link to my email address. My reasons here were two-fold: I didn't want my email plastered in plaintext on a page to make it harder for spambot crawlers to find my email address, and I wanted it somewhere immediately visible from the site index. Since I wanted my index to arrive at my blogroll (the default Pelican behavior), I decided to use reCAPTCHA's <a href="https://www.google.com/recaptcha/admin#mailhide">MailHide</a> on the other side of a link. However, at this point I was only adding links to the menu through either page titles or article categories. That behavior wouldn't work here, because I didn't want to make a document with a link to my email's reCAPTCHA inside; I wanted to link it directly to the reCAPTCHA, so when you clicked on the "Email" item in the menu it took you right there.</p>
 <p>My solution was to add an entry in my <code>pelicanconf.py</code> file called <code>MENUITEMS</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
 <span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">)</span>
 <span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This put an item in the menu with my desired functionality. The solution is deceptively easy, but as I said before I was completely new to this entire site generation process and these utilities. It took some time and searching to realize how to make it work.</p>
 <h3>Navbar organization</h3>
 <p>The last thing you'll notice is that the menu items in the navbar are inserted alphabetically according to type: manually-placed menu items first, pages second, then articles third. It also doesn't capitalize words beyond the first if you have multiple-word page titles or article categories. At this point, my navbar wasn't really adhering to the layout I desired, and I wanted to change that.</p>
 <p>Some searching revealed that Pelican includes some <a href="http://docs.getpelican.com/en/3.6.3/settings.html">settings</a> that allow you to change this default organizational behavior, and you should spend some time looking through that list and seeing what you can change by adding those lines to <code>pelicanconf.py</code>. I decided to arrange my menu item order manually, rather than allowing Pelican to do it for me. The following changes to my config file enabled it:</p>
-<div class="highlight"><pre><span></span><span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
+<div class="highlight"><pre><span></span><code><span class="n">DISPLAY_CATEGORIES_ON_MENU</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="s1">&#39;About&#39;</span><span class="p">,</span> <span class="s1">&#39;/pages/about.html&#39;</span><span class="p">),</span>
@@ -141,8 +147,7 @@ Applied Caffeine            </a>
     <span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.google.com/recaptcha/mailhide/d?...&#39;</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">&#39;Vita&#39;</span><span class="p">,</span> <span class="s1">&#39;/pdfs/HouserCV.pdf&#39;</span><span class="p">)</span>
     <span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The menu items will now be generated in this order and draw their content from directory specified as the second value in the tuple.</p>
 <p>It's important to note how all of this works in a general sense. Content I've linked manually to the menu items is being drawn from the files in the <code>output</code> directory, which is generated from the .md files I write in <code>content</code> (which is the whole point of the <code>fab</code> commands). <code>blog.html</code> is a file with dynamic links to the other files I've written with "blog" as the category, and my CV is stored in a <code>pdfs</code> directory I've created to keep track of any .pdf files I'll use throughout the site. If you maintain your site files in a well-organized hierarchy, keeping track of everything is trivial.</p>
@@ -163,105 +168,91 @@ Applied Caffeine            </a>
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="images/adam_reduced.jpg"/>
+            <img width="100%" class="img-thumbnail" src="https://appliedcaffeine.org/images/adam2.jpg"/>
         </p>
     <p>
-        <strong>About Adam Houser</strong><br/>
-        Human factors, mental models, formal methods, cybersecurity, coffee.
+      <strong>About Adam Houser</strong><br/>
+        This blog used to be about coffee.
     </p>
-</div>
+</div><!-- Sidebar -->
 <section class="well well-sm">
-    <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush">
 
-
-
-            <li class="list-group-item"><a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-0">
-                        <a href="https://appliedcaffeine.org/tag/human-factors.html">
-                            human factors
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/opinion.html">
-                            opinion
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/tutorials.html">
-                            tutorials
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
-                        <a href="https://appliedcaffeine.org/tag/cybersecurity.html">
-                            cybersecurity
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="https://appliedcaffeine.org/tag/dissertation.html">
-                            dissertation
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="https://appliedcaffeine.org/tag/coffee.html">
-                            coffee
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="https://appliedcaffeine.org/tag/systems-engineering.html">
-                            systems engineering
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="https://twitter.com/neutrinos4all" target="_blank">
-                Twitter
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/neutrinos4all" target="_blank">
-                Github
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://keybase.io/adamhouser" target="_blank">
-                Keybase.io
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://www.linkedin.com/in/neutrinos4all" target="_blank">
-                LinkedIn
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">
-                Google Scholar
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://fhsl.eng.buffalo.edu" target="_blank">
-                Formal Human Systems Lab
-            </a>
-        </li>
-      </ul>
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://appliedcaffeine.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-0">
+      <a href="https://appliedcaffeine.org/tag/human-factors.html">human factors</a>
     </li>
-    </ul>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/cybersecurity.html">cybersecurity</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/tutorials.html">tutorials</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://appliedcaffeine.org/tag/opinion.html">opinion</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://appliedcaffeine.org/tag/coffee.html">coffee</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://appliedcaffeine.org/tag/dissertation.html">dissertation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://appliedcaffeine.org/tag/miscellaneous.html">miscellaneous</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://appliedcaffeine.org/tag/systems-engineering.html">systems engineering</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="https://twitter.com/neutrinos4all" target="_blank">Twitter</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://github.com/neutrinos4all" target="_blank">Github</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://keybase.io/adamhouser" target="_blank">Keybase.io</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://www.linkedin.com/in/neutrinos4all" target="_blank">LinkedIn</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en" target="_blank">Google Scholar</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://fhsl.eng.buffalo.edu" target="_blank">Formal Human Systems Lab</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
 </section>
-            </aside>
+<!-- End Sidebar -->            </aside>
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">
-            This static site is generated with <a href="https://docs.getpelican.com/" target="_blank">Pelican</a>, utilizes the <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a> theme, and proudly supports open-source software.              <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+         <div class="col-xs-10">&copy; 2021 Adam Houser
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>, and
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
     Content
-  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
 </small></p>
          </div>
          <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
@@ -275,6 +266,8 @@ Applied Caffeine            </a>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="https://appliedcaffeine.org/theme/js/respond.min.js"></script>
+
+
 
 
 </body>
