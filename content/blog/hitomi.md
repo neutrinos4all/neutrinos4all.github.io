@@ -1,0 +1,45 @@
+---
+title: "Human error and the Hitomi X-Ray Satellite"
+date: 2018-05-05
+slug: 'human-error-and-hitomi'
+tag: 'human factors'
+---
+
+Within human factors engineering, one of the topics I'm most interested in is how human error can contribute to system failure. With news of JAXA's loss of their just-launched x-ray satellite, did human error contribute to this complex system failure as well?
+<!--more-->
+
+Within human factors engineering, one of the topics I'm most interested in is how human error can contribute to system failure. There's a host of literature that examines the nature of accidents and the role erroneous human behavior plays in them, including:
+
+* [Human Error](http://www.amazon.com/Human-Error-James-Reason/dp/0521314194) by James Reason
+* [Normal Accidents](http://www.amazon.com/Normal-Accidents-Living-High-Risk-Technologies/dp/0691004129) by Charles Perrow
+* [The Field Guide to Understanding Human Error](http://www.amazon.com/Field-Guide-Understanding-Human-Error/dp/1472439058) by Sidney Dekker
+* [To Err is Human](http://www.nap.edu/catalog/9728/to-err-is-human-building-a-safer-health-system) by Kohn, Corrigan, and Donaldson
+
+and a substantial amount of academic work in journals, conference talks, presentations, et cetera. There's a lot here, and I'm not going to turn this blog post into a literature review (I have a dissertation for that); rather, my point is that even though it's gotten a significant amount of attention there are myriad ways in which it continues to invite work. One of these examples cropped up with the recent news that [JAXA had lost its $286 million x-ray satellite](http://www.nature.com/news/software-error-doomed-japanese-hitomi-spacecraft-1.19835), ASTRO-H (Hitomi, Japanese for _eye_).
+
+As [headlines](http://www.telegraph.co.uk/news/2016/04/28/japan-says-human-error-to-blame-for-loss-of-multi-million-pound/) [blared](http://www.techtimes.com/articles/155067/20160430/software-human-errors-doom-mission-of-japans-most-powerful-x-ray-satellite.htm) that [human error](http://www.abc.net.au/news/2016-04-28/japan-space-agency-says-human-error-caused-satellite-loss/7368746) was at least partially responsible, I decided to investigate a little and see exactly how much human error contributed to the satellite's loss.
+
+### Timeline of events ###
+First, here's a rough timeline of events pulled from [JAXA's official report](http://global.jaxa.jp/projects/sat/astro_h/files/topics_20160415.pdf), starting on 26 March 2016:
+
+1. ASTRO-H rotated to re-orient itself towards a nearby quasar, Markarian 205.
+2. After the maneuver completed, the satellite was supposed to use onboard instrumentation to stabilize and fix its orientation in space using two devices: the IRU (Inertial Reference Unit) and the STT (Star Tracker). It was designed as a system check and, if the measurements conflicted by a certain margin of error, then the IRU would take over as the sole determinant for ASTRO-H's attitude.
+3. It just so happened that the satellite was passing through the [South Atlantic Anomaly](https://en.wikipedia.org/wiki/South_Atlantic_Anomaly) as it came out of maneuver and into attitude readjustment. The increased radiation in the area caused the STT to malfunction and erroneously switch out of Tracking into Acquisition mode (something that had, in fact, been [routinely observed](http://scitation.aip.org/content/aip/magazine/physicstoday/news/news-picks/japanese-satellite--em-hitomi--em--suffers-permanent-failure-a-news-pick-post) in previous orbits through the Anomaly), which for some reason stops collecting or processing data to be used in orientation calculations. Even though the satellite read in STT data once the STT finally switched back to Tracking mode, the mode interruption resulted in erroneous data that didn't match with observed IRU telemetry within a 1&deg; margin of error, so the IRU was left to make the determination for attitude correction.
+4. The onboard IRU _incorrectly_ reported that ASTRO-H was rotating at about 20&deg; per hour along the Z-axis. In such an event, onboard flywheels called reaction wheels were designed to counterbalance the rotation by spinning counter to the direction of rotation (thank you, conservation of angular momentum). Because the satellite had not been actually spinning before the wheels were activated, they actually began inducing roll.
+5. At this point, the consequences of microgravity flight are seen. On Earth, our inner ears, visual system, and gravity all work together to help us orient ourselves and determine which way is "up." In microgravity while orbiting, satellites must rely on alternative methods to determine "up" and orient themselves relative to the Earth. ASTRO-H was designed to use a Sun sensor. By determining the position of the Sun, the satellite could tell whether its orientation was being corrected by the reaction wheels, so it could begin unloading the flywheels and correcting the residual rotation with thrusters. ASTRO-H was beyond the required observational angle of the Sun, so it couldn't see it; the satellite had no way to know whether the reaction wheels were having an effect, and because it detected none it kept the reaction wheels spinning. The satellite's rate of rotation continued to increase.
+6. The reaction wheels continued to load to the point of saturation, where flywheels in general can absorb no more angular momentum. Here's what was supposed to happen: as the wheels approach saturation, magnetic torquers are supposed to deploy. These torquers are essentially little electromagnetic bars that, when current is applied to them, work against the magnetic field of the Earth to apply force; once deployed, the reaction wheels can alter their orientations (they're on gimbals, which is how the angular momentum conserved is adjusted so finely) back towards nominal. This is what happens during the "unloading" process. So long as the magnetic torquers are oriented properly within Earth's magnetic field, they can adequately compensate and effectively "bleed" the angular momentum that the gimbals unload onto the spacecraft. This will keep the spacefract stabilized. Needless to say, because ASTRO-H was in such a state and wasn't aligned properly with the regional magnetic field, unloading failed and the satellite continued to spin.
+7. At this point, the satellite was to enter a failsafe mode where chemical thrusters are used to control attitude. This is really a last-ditch effort: because it can be very hard to accurately control a satellite using these thrusters, this mode is all about just regaining gross control over the satellite, not necessarily pointing it towards a scientific target. However, ground engineers had uploaded a series of thuster firing commands about a month prior that was supposed to compensate for changes in the center of mass induced by the extension of the extendable boom, or EOB (a boom with X-ray observation instruments on the end designed to basically modify the "focal length" of the instruments). These commands were wrong, and rather than damping the spin they further exacerbated it.
+8. Shortly after, ASTRO-H basically spun itself apart, with the solar panels, the EOB, and other parts--eventually up to eleven in total--being ripped from the satellite. While it isn't fully dead, ground engineers currently have very little hope of recovering the spacecraft.
+
+And so ends thirty years of R&D, $286 million, and at least a decade of groundbreaking X-ray and black hole science. The next, most similar spacecraft isn't slated to be launched until 2028.
+
+### Where's the human error? ###
+Here, the human error lies in the lack of command verification conducted by ground engineers before uploading those thruster firing commands for attitude correction. I'm not sure if JAXA typically simulates the effects of these commands, or perhaps uses formal methods to mathematically verify and validate the commands. In any event, they were not sufficiently checked over before being uploaded. More importantly, this is an excellent example of a latent error: an error that was committed a month before anything critical happened, lying in wait for a critical event to thrust it into play. It could have conceivably been years before such a mistake was uncovered, or perhaps never at all if no malfunction ever occurred. Latent errors are more insidious and harder to spot and correct, because the delay between error commission and deleterious effect severs the immediately obvious link between the two.
+
+It's likely that there are other sources of human error, so in the future I'll try to find more information about the sequence of events and modify this post if I find any.
+
+### How else could we describe the errors that led to the disintegration of Hitomi? ###
+
+There are a number of ways we could discuss the system errors that the confluence of which resulted in the spacecraft's demise. My next posts will discuss those--this entry is long enough as it is.
+
+As always, questions and comments via email are most appreciated.

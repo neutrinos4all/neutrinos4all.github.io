@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title> - Applied Caffeine</title>
+  <meta property="og:title" content=" - Applied Caffeine" />
+  <meta name="twitter:title" content=" - Applied Caffeine" />
+  <meta name="description" content="Title: Making a vita with LaTeX Date: 2016-04-05 Category: blog Slug: latexvita Tags: tutorials Summary: For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started.
+I have to admit, one of the principal reasons for building the site is to have a personalized space on the internet that people (and potential employers) can use to get a sense of me as a potential employee.">
+  <meta property="og:description" content="Title: Making a vita with LaTeX Date: 2016-04-05 Category: blog Slug: latexvita Tags: tutorials Summary: For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started.
+I have to admit, one of the principal reasons for building the site is to have a personalized space on the internet that people (and potential employers) can use to get a sense of me as a potential employee.">
+  <meta name="twitter:description" content="Title: Making a vita with LaTeX Date: 2016-04-05 Category: blog Slug: latexvita Tags: tutorials Summary: For those of you who would like to create a better-looking curriculum vitae for prospective …">
+  <meta name="author" content="Adam M. Houser, Ph.D."/>
+  <meta property="og:site_name" content="Applied Caffeine" />
+  <meta property="og:url" content="https://appliedcaffeine.org/blog/latexvita/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.115.0">
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/style-dark.css" media="all and (prefers-color-scheme: dark)" />
+
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+
+  <script src="/js/script.js"></script>
+  <script src="/js/custom.js"></script>
+  <script defer src="/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Applied Caffeine</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-contact"><a href="/contact" title="Contact">Contact</a></li>
+      <li class="site-navi-item-tags"><a href="/tags" title="Tags">Tags</a></li>
+      <li class="site-navi-item-about"><a href="/about" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title"></h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>January 1, 0001</time></li>
+      </ul>
+      
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#typesetting">Typesetting</a></li>
+        <li><a href="#relevant-coursework-bulleted-items">Relevant coursework bulleted items</a></li>
+        <li><a href="#tasteful-colors-and-formatting">Tasteful colors and formatting</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+      <p>Title: Making a vita with LaTeX
+Date: 2016-04-05
+Category: blog
+Slug: latexvita
+Tags: tutorials
+Summary: For those of you who would like to create a better-looking curriculum vitae for prospective employers, consider using moderncv. This tutorial will help you get started.</p>
+<p>I have to admit, one of the principal reasons for building the site is to have a personalized space on the <a href="http://www.theverge.com/2016/4/2/11352744/ap-style-guide-will-no-longer-capitalize-internet">internet</a> that people (and potential employers) can use to get a sense of me as a potential employee. I can display some of my projects, talk about the work I do, and get some info about my interests. I used LinkedIn for a long time, but sometime ~2015 I realized it was becoming less useful for actual employer networking or job-searching. I recently decided I didn&rsquo;t want to use their service any more, made this site, and took down my LinkedIn profile. Maybe sometime I&rsquo;ll write more in-depth about it, perhaps once I&rsquo;ve been out of the service for a while.</p>
+<p>Anyway, that meant I&rsquo;d need a proper <a href="https://www.ncfr.org/professional-resources/career-resources/general-career-resources/your-cv-it-vita-or-vitae">curriculum vitae</a>, or at least some written and preferably downloadable method for communicating details about my education, work experience, and qualifications. I had made a vita before, but I used Word and it showed. I knew a bit of LaTeX and I wanted to demonstrate what skills I had, plus maybe continue to work on them a bit, so I decided to make the entire CV with it.</p>
+<p>I knew that I wanted to use a pre-canned template, vowing that some day I would write my own, eventually landing on <a href="https://www.ctan.org/pkg/moderncv?lang=en">moderncv</a>. It looked relatively good for being a standardized template and seemed easy to use. Once you download it (manually, through either your TeX editor or, if you&rsquo;re using Linux, through Synaptic), call the template at the very top of your .tex document:</p>
+<pre><code>:::code
+\documentclass[11pt,a4paper]{moderncv}
+</code></pre>
+<p>and you&rsquo;re off and running.</p>
+<p>This tutorial won&rsquo;t focus on using the package, because you can currently find some <a href="https://walrustech.wordpress.com/tag/template/">helpful</a> <a href="https://fredrikloch.me/post/using-moderncv/">content</a> out there on its use&ndash;not to mention the actual <a href="https://bazaar.launchpad.net/~xdanaux/moderncv/trunk/view/head:/examples/template.tex">template,</a> which includes an extensive system of very straightforward comments. I don&rsquo;t want to re-hash their work. What I will spend a bit on, though, are the little improvements I made on it.</p>
+<h3 id="typesetting">Typesetting</h3>
+<p>I didn&rsquo;t like how the standard moderncv package rendered text, particularly because I didn&rsquo;t like how it handled kerning on larger-point fonts. I opted to use <a href="https://www.google.com/fonts/specimen/EB+Garamond#charset">EB Garamond</a>, an open-source incarnation of the Garamond typeface family. Installed through the <code>texlive-fonts-extra</code> Linux package, I enabled it with:</p>
+<pre><code>:::code
+\usepackage{ebgaramond}
+</code></pre>
+<p>I also made use of small capital letters throughout my vita, particularly for section and subsection headings, becuase I thought it added a nice touch and slightly improved readability for text-heavy sections. It can be safely used throughout the template by calling <code>\textsc{your text here}</code> anywhere you&rsquo;d like to use it.</p>
+<h3 id="relevant-coursework-bulleted-items">Relevant coursework bulleted items</h3>
+<p>After I listed out all of my coursework with <code>\cvline</code> entries and rendered it, I decided it left too much negative space on the page. Putting my courses in a bulleted format would be a more efficient approach. The code I used for that section can be seen here:</p>
+<pre><code>:::code
+\section{\textsc{Relevant Coursework}}
+\hspace{6.4em}
+\begin{tabular}{p{.4\textwidth}p{.5\textwidth}}
+    $\cdot$ Advanced Formal Methods Techniques &amp; $\cdot$ Human Factors Research Methodology\\
+    $\cdot$ Cognitive Engineering &amp; $\cdot$ Human Information Processing\\
+    $\cdot$ Cognitive Processes &amp; $\cdot$ Industrial Hygiene\\
+    $\cdot$ Design and Analysis of Experiments &amp; $\cdot$ Java Programming I\\
+    $\cdot$ Formal Methods in Human Factors &amp; $\cdot$ Ontology Engineering\\
+    $\cdot$ Home Health Innovations &amp; $\cdot$ Sensing Realities\\
+    $\cdot$ Human-Computer Interaction &amp; $\cdot$ Safety in Human Factors\\
+\end{tabular}
+</code></pre>
+<p>It may take some custom tinkering on your part, but I&rsquo;ll provide a bit of explanation for the included commands:</p>
+<ul>
+<li><code>\hspace{}</code> adds horizontal white space, depending on the argument you give it inside the curly braces. The &rsquo;em&rsquo; unit label signifies an amount of horizontal space equivalent to an uppercase letter &ldquo;M&rdquo; in the font being currently used. As someone else told me, it&rsquo;s sometimes easier to visualize how large those differences are as opposed to points or millimeters.</li>
+<li><code>{tabular}{p{.4\textwidth}p{.5\textwidth}}</code> sets the two columns in my table, as well as the portion of the page that each column will occupy given in a decimal fraction of the total &ldquo;text-occupiable space&rdquo; width. Here, the first column will take 40% of the width and the second will take 50%. If you left it at .5 and .5, you&rsquo;d notice that the righthand column was pushed a little too far over, a residual effect from modifying the <code>\hspace{}</code> parameter earlier. Reducing the size of the lefthand column will pull the righthand column over, the amount of which can be finely controlled by modifying the decimal value passed in.</li>
+<li><code>$\cdot$</code> is just the LaTeX math symbol code used to render the bullets in my list. There are many ways to do it, but if you wanted to stick with a mathematical symbol check <a href="http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html">this</a> page for a quick reference.</li>
+</ul>
+<h3 id="tasteful-colors-and-formatting">Tasteful colors and formatting</h3>
+<p>The rest is up to you, your particular tastes, and what you think would make for a professional-looking vita. Using a bit of color in sparing fashion can add a bit of style to your document, so long as it isn&rsquo;t too loud. LaTeX allows for an endless variety of customization and tweaking, so don&rsquo;t shy away from using its capabilities to your advantage.</p>
+<p>As always, if you find mistakes or have questions, please send an email.</p>
+
+    </article>
+
+    
+
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/blog/keepassx/" data-toggle="tooltip" data-placement="top" title="">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/blog/malabar/" data-toggle="tooltip" data-placement="top" title="">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+
+</body>
+</html>

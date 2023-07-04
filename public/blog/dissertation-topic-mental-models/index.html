@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Computational exploration of mental models using model checking - Applied Caffeine</title>
+  <meta property="og:title" content="Computational exploration of mental models using model checking - Applied Caffeine" />
+  <meta name="twitter:title" content="Computational exploration of mental models using model checking - …" />
+  <meta name="description" content="For my dissertation, I&rsquo;m arguing that we should be able to formally model and analyze human mental models to find unanticipated problems in computer security. But what does that mean and why does it matter?">
+  <meta property="og:description" content="For my dissertation, I&rsquo;m arguing that we should be able to formally model and analyze human mental models to find unanticipated problems in computer security. But what does that mean and why does it matter?">
+  <meta name="twitter:description" content="For my dissertation, I&rsquo;m arguing that we should be able to formally model and analyze human mental models to find unanticipated problems in computer security. But what does that mean and why …">
+  <meta name="author" content="Adam M. Houser, Ph.D."/>
+  <meta property="og:site_name" content="Applied Caffeine" />
+  <meta property="og:url" content="https://appliedcaffeine.org/blog/dissertation-topic-mental-models/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.115.0">
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/style-dark.css" media="all and (prefers-color-scheme: dark)" />
+
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+
+  <script src="/js/script.js"></script>
+  <script src="/js/custom.js"></script>
+  <script defer src="/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Applied Caffeine</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-contact"><a href="/contact" title="Contact">Contact</a></li>
+      <li class="site-navi-item-tags"><a href="/tags" title="Tags">Tags</a></li>
+      <li class="site-navi-item-about"><a href="/about" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">Computational exploration of mental models using model checking</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>August 7, 2017</time></li>
+      </ul>
+      
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#system-failure-cascades-of-smaller-seemingly-innocuous-events">System failure: Cascades of smaller, seemingly innocuous events</a></li>
+        <li><a href="#using-formal-methods-to-explore-human-mental-models">Using formal methods to explore human mental models</a></li>
+        <li><a href="#what-comes-next">What comes next?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+      <p>For my dissertation, I&rsquo;m arguing that we should be able to formally model and analyze human mental models to find unanticipated problems in computer security. But what does that mean and why does it matter?</p>
+<p>Imagine that you&rsquo;re a new employee at some company and you get lots of emails a day. Some are important, but most are threads you&rsquo;ve been CC&rsquo;ed on to help you spin up on current projects, track outstanding issues, and see what others are doing. The IT department set up your email client with the read pane disabled; that is, there was no permanently present space that would show you an email as soon as you clicked on it. Rather, you had to double-click the email if you wanted to read it, and it would open the email in a new window.</p>
+<p><em>What a pain. It takes so long just to get through this daily barrage, and it&rsquo;s exhausting. If only I could do it faster&hellip;</em></p>
+<p>It would be super useful if you could just enable the read pane, then &lsquo;down arrow&rsquo; quickly through your inbox. Select an email, open it, visually scan it, and move on. No more double-click, read, click to close, double-click, read &hellip; what a timesaver! It&rsquo;s such a small change, so you just go ahead and enable the read pane in your email client settings. Instant productivity improvement.</p>
+<p><em>This is awesome.</em></p>
+<p>After a few weeks, someone from the IT department brings you in for a sit-down. Several machines at the company had recently been hit by a malware attack, and its point of origin was your computer. As the IT person asks you about this incident, we can imagine that it might go like this:</p>
+<p>IT: &ldquo;Do you remember getting any suspicious emails within the past few days?&rdquo;<br>
+You: &ldquo;Hmm, maybe. I mean I get a lot of emails, and I can&rsquo;t remember everything I click on&hellip;&rdquo;<br>
+IT: &ldquo;You mean you click on things without reading what it is?&rdquo;<br>
+You: &ldquo;Well sometimes a lot of them are crap, so I just blow through them using the down arrow. And I always make sure I don&rsquo;t click on anything that looks dangerous, like we were trained to do when I got here.&rdquo;<br>
+IT: &ldquo;Wait a minute, down arrow? What down arrow? How do you read your email?&rdquo;<br>
+You: &ldquo;With the read pane. I set it up so that I can see all my emails without having to double-click on each one of them&hellip;&rdquo;<br>
+IT: &ldquo;You <em>what?</em> We set it up to be disabled for a reason! Why would you do that?&rdquo;<br>
+You: &ldquo;I don&rsquo;t know, because I wanted to save time and be more productive! I thought I was doing a good thing! Nobody said anything about that in training, and if I didn&rsquo;t click on something dangerous I don&rsquo;t understand how I got hacked.&rdquo;<br>
+IT: &ldquo;Look, Ms. Smith, we do things the way we do them for a reason. Don&rsquo;t change them. And you can download malware just by opening a bad email, you don&rsquo;t have to click on anything. Unfortunately, I&rsquo;m going to have to tell my boss about this.&rdquo;<br>
+You: &ldquo;Oh my God, am I in trouble? I&rsquo;m so sorry about this. I just started here, I&rsquo;m a new employee. I didn&rsquo;t know. Nobody would even want to hack me anyway, I don&rsquo;t know anything&hellip;&rdquo;</p>
+<h3 id="system-failure-cascades-of-smaller-seemingly-innocuous-events">System failure: Cascades of smaller, seemingly innocuous events</h3>
+<p>In my <a href="https://appliedcaffeine.org/wcry-and-legacy-software.html">last post</a>, I argued that most complex systems failures can often be attributed to a cascade of system events that, on their own, probably seem innocuous or minor. Charles Perrow&rsquo;s <a href="https://www.amazon.com/Normal-Accidents-Living-High-Risk-Technologies/dp/0691004129">Normal Accidents</a> and James Reason&rsquo;s <a href="https://en.wikipedia.org/wiki/Swiss_cheese_model">swiss cheese model</a> of accident causation are pretty helpful here. This same thinking can be applied here to our toy scenario. Looking through it again, consider the potential problems that aligned and resulted in malware infection:</p>
+<ul>
+<li>New employee cybersecurity training only addressed phishing and attacks dependent on user clicks, rather than more passive attack strategies;</li>
+<li>New employee was inundated with emails, leading to overload and mental fatigue conditions;</li>
+<li>Email client default settings were not explained to the new employee;</li>
+<li>IT team allowed a potentially dangerous setting to remain user-configurable.</li>
+</ul>
+<p>There are probably others, but the general takeaway is that a normally-skilled user (a lifelong, prudent computer user who is neither cybersecurity expert nor spring chicken) was facing pressure to get up to speed on work practices through a large volume of email. In the interest of making a good impression in her new job, the user realized a workflow bottleneck and implemented a workaround to reduce her fatigue. However, unbeknownst to her (consequential from her incomplete training), the workaround actually made the system less secure by making it easy for automatically-executing malware to run on the system. The system was initially configured in a safer mode, but she had no idea that was a deliberate decision because nobody told her so; furthermore, she could change the setting herself, so she thought it wasn&rsquo;t that important to begin with.</p>
+<p>Each of those problems&ndash;security training that focuses only on &ldquo;click to pwn&rdquo; phishing attacks and malware, invisible defaults, insufficient granularity on user-configurable software controls&ndash;might be easily-explainable annoyances on their own. &ldquo;Yeah, we&rsquo;ve been meaning to rework the security training, we just haven&rsquo;t gotten around to it yet,&rdquo; or &ldquo;We&rsquo;re focused on the big cybersecurity risks, we don&rsquo;t have time to micromanage user settings!&rdquo; Problems also arise when we consider her mental model of how the email client worked to keep her safe from malware. Because she wasn&rsquo;t trained and wasn&rsquo;t thinking about passive malware attacks, she didn&rsquo;t recognize the vulnerability introduced by enabling the read pane and blasting through a bunch of emails without being careful about what she was opening. In a way, it was improperly calibrated to focus specifically on things like malicious Word documents and fake Gmail login pages.</p>
+<p>When these problems align in a sort of perfect storm of failure, the consequences can be catastrophic. It&rsquo;s just so hard for humans to predict, because it&rsquo;s really hard to see how these different pieces can fit together and potentially lead to a massive hack before it happens.</p>
+<p>That&rsquo;s what this dissertation is about. I hunt <a href="https://en.wikipedia.org/wiki/Black_swan_theory">black swans</a>, exploring how user mental models interacting with the world can lead to computer security problems. I do it by leveraging techniques from formal methods to find and describe those one-in-a-million events.</p>
+<h3 id="using-formal-methods-to-explore-human-mental-models">Using formal methods to explore human mental models</h3>
+<p>Formal methods are well-defined mathematical languages and techniques for the modeling, specification, and verification of systems. System models are descriptions that leverage well-supported theoretical formalisms to represent a system’s behavior. Specifications are desirable system behaviors captured as propositions expressed in a mathematically precise, unambiguous manner. Upon describing the system model and specifications, verification mathematically proves (often using exhaustive searches) whether specifications do or do not hold in the system model. A specification is proved if it is satisfied by the model, while specification violations can return a counterexample. This is an execution trace capturing the model state in which the violation occurred and a list of incremental model states leading to the violation.</p>
+<p><em>Note: That paragraph was shamelessly ripped from the paper I wrote for <a href="https://www.usenix.org/conference/soups2017">SOUPS 2017</a>. The rest of the paper can be found <a href="https://appliedcaffeine.org/docs/soups_paper.pdf">here</a>.</em></p>
+<p>We can use formal methods to analyze mental models by formally representing both the mental models and basic aspects of the target computer program with mathematical logic, create specifications (in my case, using linear temporal logic) that describe desirable properties of the interaction between the mental models and the program, then use an automated model checker to explore the entire statespace of the model/program interaction and search for specification violations. This statespace is combinatoric, which means that <em>every possible interaction</em> is enumerated, and that will include those catastrophic one-in-a-million combinations of events. The tricky part is finding them in the millions of interactions expressed in the statespace. Exhaustively searching for counterexamples is one way to do it.</p>
+<p>As mentioned before, counterexamples are produced when we get specification violations, and certain programs can include an execution trace with the counterexample. Sort of like <a href="https://en.wikipedia.org/wiki/Stack_trace">stack traces</a>, execution traces give us an exact account of the steps that occurred leading to the violation all the way back to Step0. This can help us find, diagnose, and fix the problems that led to the violation. Because this dissertation focuses on mental models, this could suggest improvements to training regimens to help users more fully develop their mental models. It&rsquo;s also conceivable that we could deduce software changes (such as denying users the ability to turn on their read pane) that could help as well.</p>
+<p>That&rsquo;s the coolest thing about this project: we could find all sorts of lurking problems that we wouldn&rsquo;t have known about until they caused an error or problem, as well as potential remedies for these problems tailored right to the issue itself. What&rsquo;s more, we&rsquo;re extending a pretty rigorous analytic method to the traditionally &ldquo;squishy&rdquo; realm of human psychology, performance, and systems interaction. There aren&rsquo;t many that do this sort of work, so I&rsquo;m extremely excited to be one of them.</p>
+<h3 id="what-comes-next">What comes next?</h3>
+<p>This entry is just the rough outline of my topic. It doesn&rsquo;t really describe the methods in detail at all, and no room is devoted to past literature and successful application of these methods to squishy humans. We also fail to discuss the limitations and challenges inherent to the use of formal methods for any analytic purpose. Future blog entries will address these issues, as well as a bunch of stuff I baked into the user/IT employee exchange: user shaming, the &lsquo;big fish&rsquo; folk model of hacking, and some other items.</p>
+<p>There&rsquo;s so much neat stuff coming up, so stay tuned!</p>
+    </article>
+
+    
+
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/blog/gulf-of-execution/" data-toggle="tooltip" data-placement="top" title="An ode to commode design">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/blog/disabling-google-analytics/" data-toggle="tooltip" data-placement="top" title="Why I activated, then disabled, Google Analytics">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+
+</body>
+</html>

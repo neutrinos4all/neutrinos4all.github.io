@@ -1,0 +1,3199 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://http://www.buffalo.edu/IE500/adamhous/DOTA2_Ontology"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://http://www.buffalo.edu/IE500/adamhous/DOTA2_Ontology">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
+    <Prefix name="bfo" IRI="http://www.ifomis.org/bfo/1.1#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="snap" IRI="http://www.ifomis.org/bfo/1.1/snap#"/>
+    <Prefix name="span" IRI="http://www.ifomis.org/bfo/1.1/span#"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">This ontology is a beginning ontology, or possible ontology template, for the items, heroes, creatures, and map characteristics of the popular online multiplayer video game DOTA 2.  The work done herein is meant to characterize the game in broad strokes by identifying, describing, and annotating the information most relevant and important features of the game.  The following types of data have been included in this file:
+
+- every basic, upgrade, and secret item available for purchase within the game;
+- every hero available for play within the game
+- classification of all interactive neutral creeps found within the game;
+- the structures found within playerspace; and
+- major geographic regions found on the map.
+
+These sections are not complete (and of course no ontology is ever complete), but this ontology is designed as a proof-of-concept construction for a video game ontology; in fact, the modularity of this ontology has been created to allow piecemeal work on the ontology.  It is my hope that other enthusiasts will be able to pick this up and begin further work to flesh out the ontology.
+
+Because the pieces of this ontology deal primarily with &quot;tangible&quot; aspects of the game, future work will undoubtedly have to focus on strategy.  Lane pushing, jungling, farming, river runs and other tactics play an incredibly important role in the game and an effective ontology will undoubtedly have to be addressed.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dc:language"/>
+        <Literal datatypeIRI="&xsd;string">en</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#CharacterState"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Defeat"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Entity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Farming"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GameState"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Jungling"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Lane_Pushing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Victory"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Abaddon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Abyssal_Blade"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/AffiliatedCreep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Aghanim&apos;s_Scepter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Alchemist"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ancient"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ancient_Apparition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Animal_Courier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Anti-Mage"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Arcane_Boots"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Armlet_of_Mordiggian"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Assault_Cuirass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Assault_Cuirass_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Axe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Band_of_Elvenskin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Base"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Batrider"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Battle_Fury"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Beastmaster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Belt_of_Strength"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Black_King_Bar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Black_King_Bar_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Blade_Mail"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Blade_of_Alacrity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Blades_of_Attack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Blink_Dagger"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bloodseeker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bloodstone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Boots_of_Speed"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Boots_of_Travel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Boots_of_Travel_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bottle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bottom_Lane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bounty_Hunter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bracer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bracer_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Brewmaster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Bristleback"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Broadsword"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Broodmother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Buckler"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Buckler_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Butterfly"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Centaur_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Centaur_Warrunner"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Chainmail"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Chaos_Knight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Chen"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Circlet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Clarity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Claymore"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Clinkz"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Cloak"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Clockwerk"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Crystal_Maiden"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Crystalys"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Crystalys_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Daedalus"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dagon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dagon_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dark_Seer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dausalus_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dazzle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Deaddress_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Death_Prophet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Demon_Edge"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Desolator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Desolator_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Diffusal_Blade"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Diffusal_Blade_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/DigitalEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dire_Base"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Disruptor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Divine_Rapier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Doom_Bringer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dragon_Knight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Drow_Ranger"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Drum_of_Endurance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Drum_of_Endurance_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Dust_of_Appearance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Eagle_Song"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Earthshaker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Elder_Titan"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Enchantress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Energy_Booster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Enigma"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ethereal_Blade"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Eul&apos;s_Scepter_of_Divinity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Eul&apos;s_Scepter_of_Divinity_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Eye_of_Skadi"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Faceless_Void"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Flying_Courier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Force_Staff"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Force_Staff_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Fountain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ganking"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Gauntlets_of_Strength"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Gem_of_True_Sight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ghost_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ghost_Scepter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Gloves_of_Haste"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Golem_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Gyrocopter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hand_of_Midas"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hand_of_Midas_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Harpy_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Headdress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Healing_Salve"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Heart_of_Tarrasque"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Heart_of_Tarrasque_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Heaven&apos;s_Halberd"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hellbear_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Helm_of_Iron_Will"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Helm_of_the_Dominator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hero"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hill_Troll_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hood_of_Defiance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Huskar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Hyperstone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Invoker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Iron_Branch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Item"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Jakiro"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Javelin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Juggernaut"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/JungleLocation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Keeper_of_the_Light"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Kobold_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Kunkka"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Large_Golem_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Large_Satyr_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Leshrac"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lich"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lifestealer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lina"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Linken&apos;s_Sphere"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Linken&apos;s_Sphere_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lone_Druid"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Luna"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Lycanthrope"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Maelstrom"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Maelstrom_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Magic_Stick"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Magic_Wand"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Magic_Wand_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Magnus"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Manta_Style"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Manta_Style_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mantle_of_Intelligence"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mask_of_Madness"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mask_of_Madness_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Medallion_of_Courage"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Medallion_of_Courage_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Medusa"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Meepo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mekansm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mekansm_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Melee_Barracks"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Melee_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Middle_Lane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mirana"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mithril_Hammer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mjollnir"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mjollnir_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Monkey_King_Bar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Morbid_Mask"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Morphling"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Mystic_Staff"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Naga_Siren"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Nature&apos;s_Prophet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Necrolyte"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Necronomicon_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Neronomicon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/NeutralCreep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Night_Stalker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Null_Talisman"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Null_Talisman_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Nyx_Assassin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Oblivion_Staff"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Observer_Ward"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ogre_Club"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ogre_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ogre_Magi"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Omniknight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Orb_of_Venom"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Orchid_Malevolence"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Orchid_Malevolence_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Outworld_Destroyer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Perseverance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Phantom_Assassin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Phantom_Lancer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Phase_Boots"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Pipe_of_Insight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Pipe_of_Insight_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Platemail"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Point_Booster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Poor_Man&apos;s_Shield"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Power_Treads"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Puck"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Pudge"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Pugna"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Quarterstaff"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Queen_of_Pain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Quelling_Blade"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Radiance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Radiance_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Radiant_Base"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ranged_Barracks"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ranged_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Razor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Reaver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Refresher_Orb"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Refresher_Orb_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Riki"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ring_of_Aquila"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ring_of_Basilius"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ring_of_Health"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ring_of_Protection"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ring_of_Regen"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/River"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Robe_of_the_Magi"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Rod_of_Atos"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Roshan_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Rubick"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sacred_Relic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sage&apos;s_Mask"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sand_King"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sange"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sange_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sange_and_Yasha"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Satanic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Satanic_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Satyr_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Scythe_of_Vyse"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sentry_Ward"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shadow_Amulet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shadow_Blade"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shadow_Demon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shadow_Fiend"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shadow_Shaman"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shiva&apos;s_Guard"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Shiva&apos;s_Guard_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Silencer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Skeleton_King"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Skull_Basher"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Skull_Basher_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Skywrath_Mage"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Slardar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Slark"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Slippers_of_Agility"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Smoke_of_Deceit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sniper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Soul_Booster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Soul_Ring"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Soul_Ring_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Spectre"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Spirit_Breaker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Staff_of_Wizardry"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Storm_Spirit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Stout_Shield"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Structure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Sven"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Talisman_of_Evasion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tango"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Templar_Assassin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tertiary_Building"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Thunderhide_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tidehunter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Timbersaw"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tinker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tiny"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Top_Lane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tower"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Town_Portal_Scroll"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tranquil_Boots"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Treant_Protector"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Troll_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Troll_Warlord"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Tusk"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ultimate_Orb"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Undying"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Urn_of_Shadows"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Urn_of_Shadows_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Ursa"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vanguard"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Veil_of_Discord"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Veil_of_Discord_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vengeful_Spirit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Venomancer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vhoul_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Viper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Visage"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vitality_Booster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vladimir&apos;s_Offering"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Vladimir&apos;s_Offering_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Voidstone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Warlock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Weaver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Windrunner"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Windwing_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Wisp"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Witch_Doctor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Wolf_Creep"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Wraith_Band"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Wraith_Band_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Yasha"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Yasha_Recipe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Zeus"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/basic_item"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/secret_item"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/upgrade_item"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/snap#Continuant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/snap#DependentContinuant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/snap#IndependentContinuant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/snap#SpatialRegion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/span#Occurrent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/span#ProcessualEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/has_component"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/is_component_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/relational_property"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/has_gold_value"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:contributor"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:creator"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:format"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:identifier"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:language"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:publisher"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:rights"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:source"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:title"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Entity"/>
+        <ObjectUnionOf>
+            <Class IRI="/snap#Continuant"/>
+            <Class IRI="/span#Occurrent"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Abyssal_Blade"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/has_component"/>
+            <ObjectIntersectionOf>
+                <Class IRI="/Sacred_Relic"/>
+                <Class IRI="/Skull_Basher"/>
+            </ObjectIntersectionOf>
+        </ObjectAllValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Abyssal_Blade"/>
+        <DataExactCardinality cardinality="6750">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Aghanim&apos;s_Scepter"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/has_component"/>
+            <ObjectIntersectionOf>
+                <Class IRI="/Blade_of_Alacrity"/>
+                <Class IRI="/Ogre_Club"/>
+                <Class IRI="/Point_Booster"/>
+                <Class IRI="/Staff_of_Wizardry"/>
+            </ObjectIntersectionOf>
+        </ObjectAllValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Aghanim&apos;s_Scepter"/>
+        <DataExactCardinality cardinality="4200">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Animal_Courier"/>
+        <DataExactCardinality cardinality="150">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Arcane_Boots"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/has_component"/>
+            <ObjectIntersectionOf>
+                <Class IRI="/Boots_of_Speed"/>
+                <Class IRI="/Energy_Booster"/>
+            </ObjectIntersectionOf>
+        </ObjectAllValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Arcane_Boots"/>
+        <DataExactCardinality cardinality="1450">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Armlet_of_Mordiggian"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/has_component"/>
+            <ObjectIntersectionOf>
+                <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+                <Class IRI="/Blades_of_Attack"/>
+                <Class IRI="/Gloves_of_Haste"/>
+                <Class IRI="/Helm_of_Iron_Will"/>
+            </ObjectIntersectionOf>
+        </ObjectAllValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Armlet_of_Mordiggian"/>
+        <DataExactCardinality cardinality="2600">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Armlet_of_Mordiggian"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+        <DataExactCardinality cardinality="1000">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Assault_Cuirass"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/has_component"/>
+            <ObjectIntersectionOf>
+                <Class IRI="/Assault_Cuirass_Recipe"/>
+                <Class IRI="/Chainmail"/>
+                <Class IRI="/Hyperstone"/>
+                <Class IRI="/Platemail"/>
+            </ObjectIntersectionOf>
+        </ObjectAllValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Assault_Cuirass"/>
+        <DataExactCardinality cardinality="5250">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Band_of_Elvenskin"/>
+        <DataExactCardinality cardinality="450">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Belt_of_Strength"/>
+        <DataExactCardinality cardinality="450">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Blade_of_Alacrity"/>
+        <DataExactCardinality cardinality="1000">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Blades_of_Attack"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Armlet_of_Mordiggian"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Blades_of_Attack"/>
+        <DataExactCardinality cardinality="450">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Boots_of_Speed"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Arcane_Boots"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Boots_of_Speed"/>
+        <DataExactCardinality cardinality="450">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Chainmail"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Assault_Cuirass"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Chainmail"/>
+        <DataExactCardinality cardinality="550">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Demon_Edge"/>
+        <DataExactCardinality cardinality="2400">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Eagle_Song"/>
+        <DataExactCardinality cardinality="3300">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Energy_Booster"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Arcane_Boots"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Energy_Booster"/>
+        <DataExactCardinality cardinality="1000">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Gloves_of_Haste"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Armlet_of_Mordiggian"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Gloves_of_Haste"/>
+        <DataExactCardinality cardinality="500">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Helm_of_Iron_Will"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Armlet_of_Mordiggian"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Helm_of_Iron_Will"/>
+        <DataExactCardinality cardinality="950">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Hyperstone"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Assault_Cuirass"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Hyperstone"/>
+        <DataExactCardinality cardinality="1000">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Ogre_Club"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Aghanim&apos;s_Scepter"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Ogre_Club"/>
+        <DataExactCardinality cardinality="1000">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Platemail"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Assault_Cuirass"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Platemail"/>
+        <DataExactCardinality cardinality="1400">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Point_Booster"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Aghanim&apos;s_Scepter"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Sacred_Relic"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Abyssal_Blade"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Sacred_Relic"/>
+        <DataExactCardinality cardinality="3800">
+            <DataProperty IRI="/has_gold_value"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Skull_Basher"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Abyssal_Blade"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Staff_of_Wizardry"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/is_component_of"/>
+            <Class IRI="/Aghanim&apos;s_Scepter"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/snap#Continuant"/>
+        <ObjectUnionOf>
+            <Class IRI="/snap#DependentContinuant"/>
+            <Class IRI="/snap#IndependentContinuant"/>
+            <Class IRI="/snap#SpatialRegion"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#CharacterState"/>
+        <Class IRI="/span#ProcessualEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Defeat"/>
+        <Class IRI="#GameState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Farming"/>
+        <Class IRI="#CharacterState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GameState"/>
+        <Class IRI="/span#ProcessualEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Jungling"/>
+        <Class IRI="#CharacterState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Lane_Pushing"/>
+        <Class IRI="#CharacterState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Victory"/>
+        <Class IRI="#GameState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Abaddon"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Abyssal_Blade"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/AffiliatedCreep"/>
+        <Class IRI="/Creep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Aghanim&apos;s_Scepter"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Alchemist"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ancient"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ancient_Apparition"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Animal_Courier"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Anti-Mage"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Arcane_Boots"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Armlet_of_Mordiggian"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Assault_Cuirass"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Assault_Cuirass_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Axe"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Band_of_Elvenskin"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bane"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Base"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Batrider"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Battle_Fury"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Beastmaster"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Belt_of_Strength"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Black_King_Bar"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Black_King_Bar_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Blade_Mail"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Blade_of_Alacrity"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Blades_of_Attack"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Blink_Dagger"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bloodseeker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bloodstone"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Boots_of_Speed"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Boots_of_Travel"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Boots_of_Travel_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bottle"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bottom_Lane"/>
+        <Class IRI="/Lane"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bounty_Hunter"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bracer"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bracer_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Brewmaster"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Bristleback"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Broadsword"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Broodmother"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Buckler"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Buckler_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Butterfly"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Centaur_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Centaur_Warrunner"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Chainmail"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Chaos_Knight"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Chen"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Circlet"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Clarity"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Claymore"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Clinkz"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Cloak"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Clockwerk"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Creep"/>
+        <Class IRI="/DigitalEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Crystal_Maiden"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Crystalys"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Crystalys_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Daedalus"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dagon"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dagon_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dark_Seer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dausalus_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dazzle"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Deaddress_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Death_Prophet"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Demon_Edge"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Desolator"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Desolator_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Diffusal_Blade"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Diffusal_Blade_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/DigitalEntity"/>
+        <Class IRI="/snap#IndependentContinuant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dire_Base"/>
+        <Class IRI="/Base"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Disruptor"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Divine_Rapier"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Doom_Bringer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dragon_Knight"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Drow_Ranger"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Drum_of_Endurance"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Drum_of_Endurance_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Dust_of_Appearance"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Eagle_Song"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Earthshaker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Elder_Titan"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Enchantress"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Energy_Booster"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Enigma"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ethereal_Blade"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Eul&apos;s_Scepter_of_Divinity"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Eul&apos;s_Scepter_of_Divinity_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Eye_of_Skadi"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Faceless_Void"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Flying_Courier"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Force_Staff"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Force_Staff_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Fountain"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ganking"/>
+        <Class IRI="#CharacterState"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Gauntlets_of_Strength"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Gem_of_True_Sight"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ghost_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ghost_Scepter"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Gloves_of_Haste"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Golem_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Gyrocopter"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hand_of_Midas"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hand_of_Midas_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Harpy_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Headdress"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Healing_Salve"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Heart_of_Tarrasque"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Heart_of_Tarrasque_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Heaven&apos;s_Halberd"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hellbear_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Helm_of_Iron_Will"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Helm_of_the_Dominator"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hero"/>
+        <Class IRI="/DigitalEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hill_Troll_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hood_of_Defiance"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Huskar"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Hyperstone"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Invoker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Iron_Branch"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Item"/>
+        <Class IRI="/DigitalEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Jakiro"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Javelin"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Juggernaut"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/JungleLocation"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Keeper_of_the_Light"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Kobold_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Kunkka"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lane"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Large_Golem_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Large_Satyr_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Leshrac"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lich"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lifestealer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lina"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Linken&apos;s_Sphere"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Linken&apos;s_Sphere_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lion"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lone_Druid"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Luna"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Lycanthrope"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Maelstrom"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Maelstrom_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Magic_Stick"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Magic_Wand"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Magic_Wand_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Magnus"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Manta_Style"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Manta_Style_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mantle_of_Intelligence"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mask_of_Madness"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mask_of_Madness_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Medallion_of_Courage"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Medallion_of_Courage_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Medusa"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Meepo"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mekansm"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mekansm_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Melee_Barracks"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Melee_Creep"/>
+        <Class IRI="/AffiliatedCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Middle_Lane"/>
+        <Class IRI="/Lane"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mirana"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mithril_Hammer"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mjollnir"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mjollnir_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Monkey_King_Bar"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Morbid_Mask"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Morphling"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Mystic_Staff"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Naga_Siren"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Nature&apos;s_Prophet"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Necrolyte"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Necronomicon_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Neronomicon"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/NeutralCreep"/>
+        <Class IRI="/Creep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Night_Stalker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Null_Talisman"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Null_Talisman_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Nyx_Assassin"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Oblivion_Staff"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Observer_Ward"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ogre_Club"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ogre_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ogre_Magi"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Omniknight"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Orb_of_Venom"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Orchid_Malevolence"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Orchid_Malevolence_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Outworld_Destroyer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Perseverance"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Phantom_Assassin"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Phantom_Lancer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Phase_Boots"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Pipe_of_Insight"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Pipe_of_Insight_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Platemail"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Point_Booster"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Poor_Man&apos;s_Shield"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Power_Treads"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Puck"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Pudge"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Pugna"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Quarterstaff"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Queen_of_Pain"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Quelling_Blade"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Radiance"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Radiance_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Radiant_Base"/>
+        <Class IRI="/Base"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ranged_Barracks"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ranged_Creep"/>
+        <Class IRI="/AffiliatedCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Razor"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Reaver"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Refresher_Orb"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Refresher_Orb_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Riki"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ring_of_Aquila"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ring_of_Basilius"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ring_of_Health"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ring_of_Protection"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ring_of_Regen"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/River"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Robe_of_the_Magi"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Rod_of_Atos"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Roshan_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Rubick"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sacred_Relic"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sage&apos;s_Mask"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sand_King"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sange"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sange_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sange_and_Yasha"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Satanic"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Satanic_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Satyr_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Scythe_of_Vyse"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sentry_Ward"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shadow_Amulet"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shadow_Blade"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shadow_Demon"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shadow_Fiend"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shadow_Shaman"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shiva&apos;s_Guard"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Shiva&apos;s_Guard_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Silencer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Skeleton_King"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Skull_Basher"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Skull_Basher_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Skywrath_Mage"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Slardar"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Slark"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Slippers_of_Agility"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Smoke_of_Deceit"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sniper"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Soul_Booster"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Soul_Ring"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Soul_Ring_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Spectre"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Spirit_Breaker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Staff_of_Wizardry"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Storm_Spirit"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Stout_Shield"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Structure"/>
+        <Class IRI="/DigitalEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Sven"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Talisman_of_Evasion"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tango"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Templar_Assassin"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tertiary_Building"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Thunderhide_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tidehunter"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Timbersaw"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tinker"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tiny"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Top_Lane"/>
+        <Class IRI="/Lane"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tower"/>
+        <Class IRI="/Structure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Town_Portal_Scroll"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tranquil_Boots"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Treant_Protector"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Troll_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Troll_Warlord"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Tusk"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ultimate_Orb"/>
+        <Class IRI="/basic_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Undying"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Urn_of_Shadows"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Urn_of_Shadows_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Ursa"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vanguard"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Veil_of_Discord"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Veil_of_Discord_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vengeful_Spirit"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Venomancer"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vhoul_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Viper"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Visage"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vitality_Booster"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vladimir&apos;s_Offering"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Vladimir&apos;s_Offering_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Voidstone"/>
+        <Class IRI="/secret_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Warlock"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Weaver"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Windrunner"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Windwing_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Wisp"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Witch_Doctor"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Wolf_Creep"/>
+        <Class IRI="/NeutralCreep"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Wraith_Band"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Wraith_Band_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Yasha"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Yasha_Recipe"/>
+        <Class IRI="/upgrade_item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Zeus"/>
+        <Class IRI="/Hero"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/basic_item"/>
+        <Class IRI="/Item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/secret_item"/>
+        <Class IRI="/Item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/upgrade_item"/>
+        <Class IRI="/Item"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/snap#Continuant"/>
+        <Class IRI="#Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/snap#DependentContinuant"/>
+        <Class IRI="/snap#Continuant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/snap#IndependentContinuant"/>
+        <Class IRI="/snap#Continuant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/snap#SpatialRegion"/>
+        <Class IRI="/snap#Continuant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/span#Occurrent"/>
+        <Class IRI="#Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/span#ProcessualEntity"/>
+        <Class IRI="/span#Occurrent"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#CharacterState"/>
+        <Class IRI="#GameState"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Defeat"/>
+        <Class IRI="#Victory"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Farming"/>
+        <Class IRI="#Jungling"/>
+        <Class IRI="#Lane_Pushing"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Farming"/>
+        <Class IRI="#Jungling"/>
+        <Class IRI="#Lane_Pushing"/>
+        <Class IRI="/Ganking"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Abaddon"/>
+        <Class IRI="/Alchemist"/>
+        <Class IRI="/Ancient_Apparition"/>
+        <Class IRI="/Anti-Mage"/>
+        <Class IRI="/Axe"/>
+        <Class IRI="/Bane"/>
+        <Class IRI="/Batrider"/>
+        <Class IRI="/Beastmaster"/>
+        <Class IRI="/Bloodseeker"/>
+        <Class IRI="/Bounty_Hunter"/>
+        <Class IRI="/Brewmaster"/>
+        <Class IRI="/Bristleback"/>
+        <Class IRI="/Broodmother"/>
+        <Class IRI="/Centaur_Warrunner"/>
+        <Class IRI="/Chaos_Knight"/>
+        <Class IRI="/Chen"/>
+        <Class IRI="/Clinkz"/>
+        <Class IRI="/Clockwerk"/>
+        <Class IRI="/Crystal_Maiden"/>
+        <Class IRI="/Dark_Seer"/>
+        <Class IRI="/Dazzle"/>
+        <Class IRI="/Death_Prophet"/>
+        <Class IRI="/Disruptor"/>
+        <Class IRI="/Doom_Bringer"/>
+        <Class IRI="/Dragon_Knight"/>
+        <Class IRI="/Drow_Ranger"/>
+        <Class IRI="/Earthshaker"/>
+        <Class IRI="/Elder_Titan"/>
+        <Class IRI="/Enchantress"/>
+        <Class IRI="/Enigma"/>
+        <Class IRI="/Faceless_Void"/>
+        <Class IRI="/Gyrocopter"/>
+        <Class IRI="/Huskar"/>
+        <Class IRI="/Invoker"/>
+        <Class IRI="/Jakiro"/>
+        <Class IRI="/Juggernaut"/>
+        <Class IRI="/Keeper_of_the_Light"/>
+        <Class IRI="/Kunkka"/>
+        <Class IRI="/Leshrac"/>
+        <Class IRI="/Lich"/>
+        <Class IRI="/Lifestealer"/>
+        <Class IRI="/Lina"/>
+        <Class IRI="/Lion"/>
+        <Class IRI="/Lone_Druid"/>
+        <Class IRI="/Luna"/>
+        <Class IRI="/Lycanthrope"/>
+        <Class IRI="/Magnus"/>
+        <Class IRI="/Medusa"/>
+        <Class IRI="/Meepo"/>
+        <Class IRI="/Mirana"/>
+        <Class IRI="/Morphling"/>
+        <Class IRI="/Naga_Siren"/>
+        <Class IRI="/Nature&apos;s_Prophet"/>
+        <Class IRI="/Necrolyte"/>
+        <Class IRI="/Night_Stalker"/>
+        <Class IRI="/Nyx_Assassin"/>
+        <Class IRI="/Ogre_Magi"/>
+        <Class IRI="/Omniknight"/>
+        <Class IRI="/Outworld_Destroyer"/>
+        <Class IRI="/Phantom_Assassin"/>
+        <Class IRI="/Phantom_Lancer"/>
+        <Class IRI="/Puck"/>
+        <Class IRI="/Pudge"/>
+        <Class IRI="/Pugna"/>
+        <Class IRI="/Queen_of_Pain"/>
+        <Class IRI="/Razor"/>
+        <Class IRI="/Riki"/>
+        <Class IRI="/Rubick"/>
+        <Class IRI="/Sand_King"/>
+        <Class IRI="/Shadow_Demon"/>
+        <Class IRI="/Shadow_Fiend"/>
+        <Class IRI="/Shadow_Shaman"/>
+        <Class IRI="/Silencer"/>
+        <Class IRI="/Skeleton_King"/>
+        <Class IRI="/Skywrath_Mage"/>
+        <Class IRI="/Slardar"/>
+        <Class IRI="/Slark"/>
+        <Class IRI="/Sniper"/>
+        <Class IRI="/Spectre"/>
+        <Class IRI="/Spirit_Breaker"/>
+        <Class IRI="/Storm_Spirit"/>
+        <Class IRI="/Sven"/>
+        <Class IRI="/Templar_Assassin"/>
+        <Class IRI="/Tidehunter"/>
+        <Class IRI="/Timbersaw"/>
+        <Class IRI="/Tinker"/>
+        <Class IRI="/Tiny"/>
+        <Class IRI="/Treant_Protector"/>
+        <Class IRI="/Troll_Warlord"/>
+        <Class IRI="/Tusk"/>
+        <Class IRI="/Undying"/>
+        <Class IRI="/Ursa"/>
+        <Class IRI="/Vengeful_Spirit"/>
+        <Class IRI="/Venomancer"/>
+        <Class IRI="/Viper"/>
+        <Class IRI="/Visage"/>
+        <Class IRI="/Warlock"/>
+        <Class IRI="/Weaver"/>
+        <Class IRI="/Windrunner"/>
+        <Class IRI="/Wisp"/>
+        <Class IRI="/Witch_Doctor"/>
+        <Class IRI="/Zeus"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/AffiliatedCreep"/>
+        <Class IRI="/NeutralCreep"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Ancient"/>
+        <Class IRI="/Fountain"/>
+        <Class IRI="/Melee_Barracks"/>
+        <Class IRI="/Ranged_Barracks"/>
+        <Class IRI="/Tertiary_Building"/>
+        <Class IRI="/Tower"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Base"/>
+        <Class IRI="/JungleLocation"/>
+        <Class IRI="/Lane"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Base"/>
+        <Class IRI="/JungleLocation"/>
+        <Class IRI="/Lane"/>
+        <Class IRI="/River"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Bottom_Lane"/>
+        <Class IRI="/Middle_Lane"/>
+        <Class IRI="/Top_Lane"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Centaur_Creep"/>
+        <Class IRI="/Ghost_Creep"/>
+        <Class IRI="/Golem_Creep"/>
+        <Class IRI="/Harpy_Creep"/>
+        <Class IRI="/Hellbear_Creep"/>
+        <Class IRI="/Hill_Troll_Creep"/>
+        <Class IRI="/Kobold_Creep"/>
+        <Class IRI="/Large_Golem_Creep"/>
+        <Class IRI="/Large_Satyr_Creep"/>
+        <Class IRI="/Ogre_Creep"/>
+        <Class IRI="/Roshan_Creep"/>
+        <Class IRI="/Satyr_Creep"/>
+        <Class IRI="/Thunderhide_Creep"/>
+        <Class IRI="/Troll_Creep"/>
+        <Class IRI="/Vhoul_Creep"/>
+        <Class IRI="/Windwing_Creep"/>
+        <Class IRI="/Wolf_Creep"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Creep"/>
+        <Class IRI="/Hero"/>
+        <Class IRI="/Item"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Creep"/>
+        <Class IRI="/Hero"/>
+        <Class IRI="/Item"/>
+        <Class IRI="/Structure"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Creep"/>
+        <Class IRI="/Hero"/>
+        <Class IRI="/secret_item"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Creep"/>
+        <Class IRI="/Hero"/>
+        <Class IRI="/upgrade_item"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Creep"/>
+        <Class IRI="/basic_item"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Dire_Base"/>
+        <Class IRI="/Radiant_Base"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Hero"/>
+        <Class IRI="/basic_item"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Melee_Creep"/>
+        <Class IRI="/Ranged_Creep"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/snap#Continuant"/>
+        <Class IRI="/span#Occurrent"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/snap#DependentContinuant"/>
+        <Class IRI="/snap#IndependentContinuant"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/snap#DependentContinuant"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/snap#IndependentContinuant"/>
+        <Class IRI="/snap#SpatialRegion"/>
+    </DisjointClasses>
+    <DisjointUnion>
+        <Class IRI="/Abyssal_Blade"/>
+        <Class IRI="/Sacred_Relic"/>
+        <Class IRI="/Skull_Basher"/>
+    </DisjointUnion>
+    <DisjointUnion>
+        <Class IRI="/Aghanim&apos;s_Scepter"/>
+        <Class IRI="/Blade_of_Alacrity"/>
+        <Class IRI="/Ogre_Club"/>
+        <Class IRI="/Point_Booster"/>
+        <Class IRI="/Staff_of_Wizardry"/>
+    </DisjointUnion>
+    <DisjointUnion>
+        <Class IRI="/Arcane_Boots"/>
+        <Class IRI="/Boots_of_Speed"/>
+        <Class IRI="/Energy_Booster"/>
+    </DisjointUnion>
+    <DisjointUnion>
+        <Class IRI="/Armlet_of_Mordiggian"/>
+        <Class IRI="/Armlet_of_Mordiggian_Recipe"/>
+        <Class IRI="/Blades_of_Attack"/>
+        <Class IRI="/Gloves_of_Haste"/>
+        <Class IRI="/Helm_of_Iron_Will"/>
+    </DisjointUnion>
+    <DisjointUnion>
+        <Class IRI="/Assault_Cuirass"/>
+        <Class IRI="/Chainmail"/>
+        <Class IRI="/Hyperstone"/>
+        <Class IRI="/Platemail"/>
+    </DisjointUnion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/has_component"/>
+        <ObjectProperty IRI="/relational_property"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/is_component_of"/>
+        <ObjectProperty IRI="/relational_property"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/is_component_of"/>
+        <ObjectProperty IRI="/has_component"/>
+    </InverseObjectProperties>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="/has_component"/>
+    </AsymmetricObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="/is_component_of"/>
+    </AsymmetricObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="/has_component"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="/is_component_of"/>
+    </IrreflexiveObjectProperty>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CharacterState</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Character states are states that a character can be in or processes that they can be involved in.  So long as heroes are &quot;within&quot; these states or performing these actions, they become that action until they are done.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Entity</IRI>
+        <Literal datatypeIRI="&xsd;string">entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#GameState</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">These are states of the game itself, something that single heroes cannot participate in but are rather changes in the game that affect all heroes.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Base</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">This is the home base of each Hero, and it is classified as the area occupied and guarded by the base&apos;s tower defenses and The Ancient.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Creep</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A creep is a digital creature within the game that can be attacked but not controlled.  Creeps vary in strength and ability, as well as location or allegiance.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Creep</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Examples: thunderhides, satyrs, Roshan.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/DigitalEntity</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A digital entity within DOTA 2 is anything that players can interact with ( by controlling, attacking, destroying, purchasing, et cetera).  It is an entity unto itself.  This is unlike other things, such as spatial regions (like lanes) that are not interactive within the game.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/DigitalEntity</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Examples: Slardar, Radiance, Roshan, Boots of Speed, and Dire&apos;s Ancient.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Hero</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A hero is a playable entity within the game that can be controlled by humans.  Each human player has control over his or her own hero, and players ultimately use their heroes to destroy enemy structures to win the game.  Each hero has its own unique abilities, skills, and attributes that can influence gameplay in myriad ways.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Hero</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Examples: Chen, Lion, Io, Anti-Mage, Sniper.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Item</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Examples: Gloves of Haste, Hyperstone, Eul&apos;s Scepter of Divinity, Staff of Wizardry.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Item</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Items are digital entities (swords, suits of armor, magic wands, pairs of gloves, et cetera) that heroes can purchase or combine with some other items to create more powerful items.  Each item gives its own special abilities or bonuses, lending strength to characters to use against enemies or elsewhere throughout the game.  Items are divided up into basic items, upgrade items, and secret items, and all cost a set amount of money (expressed in gold pieces in DOTA 2).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/JungleLocation</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Outside the lanes is the jungle, and within the jungle there are locations that are important for ward placement, neutral creep regeneration, gank points, and lane pull areas.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Lane</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">These are the main routes along which affiliated creeps and heroes fight and move towards the enemy&apos;s base.  Lanes are delineated by long grassy strips that cut clear paths through the jungle.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/River</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The river is an important strategic area within the DOTA 2 map, cutting diagonally through the map and allowing rapid transit from one lane to another without double-backing on one&apos;s position or entering dangerous enemy territory.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Structure</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Examples: towers, Dire&apos;s Ancient.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/Structure</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Structures are digital entities within DOTA 2 that can be interacted with (e.g., they have hit points and can be destroyed).  Within this ontology, structures of this nature have not been classified as spatial regions because emphasis has been placed on these buildings&apos; existence.  Victory in the game is not possible unless at least some of these structures are destroyed, and so heroes are concerned with whether they are standing rather than where they are located (because every match of DOTA 2 played will have buildings located in exactly the same place).  
+
+This distinction is very important to keep clear from the beginning, because one who is not careful with this delineation could end up committing violations of the true path rule and creating multiple inheritances problems.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/has_component</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The has_component relationship is meant to show the relationship between greater items and lesser items, with greater items being made by combining two or more lesser items together.
+
+If &quot;greater item X&quot; can be made by combining component items 1, 2, and 3, then the triple would read: greaterItemX has_component componentItem1.  It is my hope that the reasoner will automatically fill in the opposite assertion (that componentItem1 is_component_of greaterItemX).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/has_gold_value</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The data property &quot;has_gold_value&quot; has been written to express the value of items in gold pieces.  Each item in DOTA 2 has a value, and for the item&apos;s particular value it can be bought (or sometimes sold) at shops at different places on the map.  These are being included in the initial stages of this ontology to demonstrate its potential use in future applications.
+
+For the purpose of this ontology, the first four classes of each item type (basic, upgrade, and secret) have been given a gold value.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/is_component_of</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The is_component_of relational property asserts that any item that has such a relationship will be a component item of that larger item.  So, for example, if &quot;greater item X&quot; has component items 1, 2, and 3, then the equivalent class description should read that component item 1 is_component_of &quot;greater item X.&quot;
+
+For the purposes of this demonstration, the component items of the first four upgrade items have been expressed using this relationship.  It is my hope that some day I can figure out how to make the reasoner do this automatically.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#Continuant</IRI>
+        <Literal datatypeIRI="&xsd;string">Definition: A continuant is a substantial entity [bfo:Entity] that exists in full at any time in which it exists at all, persists through time while maintaining its identity and has no temporal parts.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#Continuant</IRI>
+        <Literal datatypeIRI="&xsd;string">Examples: a hero, an item, an item recipe, a creep that exists somewhere on the map, or even perhaps a role or designation given to specific heroes.  These things are distinct entities that persist in a nonchanging state so long as they exist within the game.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/snap#Continuant</IRI>
+        <Literal datatypeIRI="&xsd;string">continuant</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#DependentContinuant</IRI>
+        <Literal datatypeIRI="&xsd;string">Definition: A dependent_continuant is a continuant [snap:Continuant] that is either dependent on one or more independent continuants [snap:IndependentContinuant] bearers or inheres in or is borne by other entities.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#DependentContinuant</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Example: a dependent_continuant would be a hero occupying a certain role, such as a lane pusher or nuker, or even something more general such as a carry or support hero.  Any hero can gain such designation, but there is nothing more to signify such conditions as the actions of the hero in the game (in other words, nothing physically changes about the hero) and the existence of such roles depend on heroes undertaking such actions.  As such, these roles would be considered dependent_continuants.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/snap#DependentContinuant</IRI>
+        <Literal datatypeIRI="&xsd;string">dependent_continuant</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#IndependentContinuant</IRI>
+        <Literal datatypeIRI="&xsd;string">Definition: An independent continuant is a continuant [snap:Continuant] that is a bearer of quality [snap:Quality] and realizable entity [snap:RealizableEntity] entities, in which other entities inhere and which itself cannot inhere in anything.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#IndependentContinuant</IRI>
+        <Literal datatypeIRI="&xsd;string">Examples: tangible existent entities within the game, such as creeps, heroes, items, items, or other things that persist in a rigid, unchanging state as long as they exist within the game.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/snap#IndependentContinuant</IRI>
+        <Literal datatypeIRI="&xsd;string">independent_continuant</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#SpatialRegion</IRI>
+        <Literal datatypeIRI="&xsd;string">Comment: All instances of continuant [snap:Continuant] are spatial entities, that is, they enter in the relation of (spatial) location with spatial region [snap:SpatialRegion] entities. As a particular case, the exact spatial location of a spatial region [snap:SpatialRegion] is this region itself.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#SpatialRegion</IRI>
+        <Literal datatypeIRI="&xsd;string">Comment: An instance of spatial region [snap:SpatialRegion] is a part of space. All parts of space are spatial region [snap:SpatialRegion] entities and only spatial region [snap:SpatialRegion] entities are parts of space. Space is the entire extent of the spatial universe, a designated individual, which is thus itself a spatial region [snap:SpatialRegion].</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#SpatialRegion</IRI>
+        <Literal datatypeIRI="&xsd;string">Comment: Space and spatial region [snap:SpatialRegion] entities are entities in their own rights which exist independently of any entities which can be located at them. This view of space is sometimes called &quot;absolutist&quot; or &quot;the container view&quot;. In BFO, the class site [snap:Site] allows for a so-called relational view of space, that is to say, a view according to which spatiality is a matter of relative location between entities and not a matter of being tied to space. The bridge between these two views is secured through the fact that while instances of site [snap:Site] are not spatial region [snap:SpatialRegion] entities, they are nevertheless spatial entities.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/snap#SpatialRegion</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Spatial regions are non-interactive entities on the map that are classified by the space they occupy rather than their functions in relation to heroes.  In other words, these are places to go rather than things upon which victory or defeat conditions rest.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/snap#SpatialRegion</IRI>
+        <Literal datatypeIRI="&xsd;string">spatial_region</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/span#Occurrent</IRI>
+        <Literal datatypeIRI="&xsd;string">Definition: An occurrent is a processural entity [bfo:Entity] that has temporal parts and that happens, unfolds or develops through time.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/span#Occurrent</IRI>
+        <Literal datatypeIRI="&xsd;string">Examples: Processes within the game, such as health regeneration, mana regeneration, efforts to push lanes made by heroes within the game, and certain conditions such as victory and defeat.  These entities do not exist unless they are occurring or are being performed; they therefore depend upon a temporal component for their existence and so are occurrents.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/span#Occurrent</IRI>
+        <Literal datatypeIRI="&xsd;string">occurrent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/span#ProcessualEntity</IRI>
+        <Literal datatypeIRI="&xsd;string">Definition: An occurrent [span:Occurrent] that exists in time by occurring or happening, has temporal parts and always involves and depends on some entity.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/span#ProcessualEntity</IRI>
+        <Literal datatypeIRI="&xsd;string">processual_entity</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

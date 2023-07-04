@@ -1,0 +1,48 @@
+baseURL = 'https://appliedcaffeine.org/'
+languageCode = 'en-us'
+title = 'Applied Caffeine'
+theme = 'whiteplain'
+
+paginate = 99
+
+[params.author]
+  name = "Adam M. Houser, Ph.D."
+  avatar = "/adam2.jpg"
+
+  mastodon = "https://hci.social/@neutrinos4all"
+  linkedin = "https://www.linkedin.com/in/neutrinos4all"
+  github = "https://github.com/neutrinos4all"
+  google_scholar = "https://scholar.google.com/citations?user=1YWWgxQAAAAJ&hl=en"
+  #email = "Your email"
+
+# sectionPagesMenu = "main"
+
+# Header Menu
+[[menu.main]]
+  pageRef="contact"
+  name = 'Contact'
+  url = './contact/index'
+  weight = 30
+[[menu.main]]
+  pageRef="publications"
+  name = 'Publications'
+  url = './publications/index'
+  weight = 20
+[[menu.main]]
+  pageRef="about"
+  name = 'About'
+  url = './about/index'
+  weight = 10
+
+
+# Footer Menu
+[[menu.footer]]
+  name = "About"
+  weight = 1
+  identifier = "about"
+  url = "/about/"
+
+[markup.goldmark.renderer]
+  hardWraps = false
+  unsafe = true
+  xhtml = false

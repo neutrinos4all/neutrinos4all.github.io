@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title> - Applied Caffeine</title>
+  <meta property="og:title" content=" - Applied Caffeine" />
+  <meta name="twitter:title" content=" - Applied Caffeine" />
+  <meta name="description" content="Title: Installing Pi-hole on a BeagleBoard to block ads Date: 2017-1-4 Category: blog Slug: pi-hole-on-beagleboard Tags: tutorials Summary: Instructions for installing Pi-hole to systematically block advertisements across your network are easy to find, but it gets a little more tricky when using different hardware. Here are some tips to get up and running with a BeagleBoard.
+A note to readers I&rsquo;ve updated this post several times after getting comments from readers and helping them troubleshoot their installations.">
+  <meta property="og:description" content="Title: Installing Pi-hole on a BeagleBoard to block ads Date: 2017-1-4 Category: blog Slug: pi-hole-on-beagleboard Tags: tutorials Summary: Instructions for installing Pi-hole to systematically block advertisements across your network are easy to find, but it gets a little more tricky when using different hardware. Here are some tips to get up and running with a BeagleBoard.
+A note to readers I&rsquo;ve updated this post several times after getting comments from readers and helping them troubleshoot their installations.">
+  <meta name="twitter:description" content="Title: Installing Pi-hole on a BeagleBoard to block ads Date: 2017-1-4 Category: blog Slug: pi-hole-on-beagleboard Tags: tutorials Summary: Instructions for installing Pi-hole to systematically block …">
+  <meta name="author" content="Adam M. Houser, Ph.D."/>
+  <meta property="og:site_name" content="Applied Caffeine" />
+  <meta property="og:url" content="https://appliedcaffeine.org/blog/pihole/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.115.0">
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/style-dark.css" media="all and (prefers-color-scheme: dark)" />
+
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+
+  <script src="/js/script.js"></script>
+  <script src="/js/custom.js"></script>
+  <script defer src="/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Applied Caffeine</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-contact"><a href="/contact" title="Contact">Contact</a></li>
+      <li class="site-navi-item-tags"><a href="/tags" title="Tags">Tags</a></li>
+      <li class="site-navi-item-about"><a href="/about" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title"></h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>January 1, 0001</time></li>
+      </ul>
+      
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#a-note-to-readers">A note to readers</a></li>
+        <li><a href="#original-post">Original post</a></li>
+        <li><a href="#my-deployment">My deployment</a></li>
+        <li><a href="#first-task-uninstalling-connman-to-free-port-53">First task: Uninstalling ConnMan to free port 53</a></li>
+        <li><a href="#second-task-uninstalling-nodejs-to-free-port-80">Second task: Uninstalling node.js to free port 80</a></li>
+        <li><a href="#third-task-installing-pi-hole">Third task: Installing Pi-hole</a></li>
+        <li><a href="#changelog">Changelog</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+      <p>Title: Installing Pi-hole on a BeagleBoard to block ads
+Date: 2017-1-4
+Category: blog
+Slug: pi-hole-on-beagleboard
+Tags: tutorials
+Summary: Instructions for installing Pi-hole to systematically block advertisements across your network are easy to find, but it gets a little more tricky when using different hardware. Here are some tips to get up and running with a BeagleBoard.</p>
+<h3 id="a-note-to-readers">A note to readers</h3>
+<p>I&rsquo;ve updated this post several times after getting comments from readers and helping them troubleshoot their installations. As you read through, note the changes at the bottom of the page. If you experience other issues, write me, we&rsquo;ll figure it out, and I&rsquo;ll make the update to this page.</p>
+<h3 id="original-post">Original post</h3>
+<p>I&rsquo;ve had a BeagleBoard sitting around unutilized since last winter, and I wanted to find a fun little project for it. I ran across <a href="https://pi-hole.net/">Pi-hole</a>, a program that can be installed on a Raspberry Pi and used to block ads at the network level (as opposed to doing so from the browsers of each individual machine on your home internet network). It&rsquo;s a simple process to get up and running:</p>
+<ul>
+<li>Connect your hardware to your router via ethernet cable;</li>
+<li>Log in to your hardware and install Pi-hole;</li>
+<li>Log in to your router and manually set its DNS IP address to your hardware&rsquo;s IP address</li>
+<li>Reboot both devices and see ads blocked on all of your computers and devices!</li>
+</ul>
+<p>I had a BeagleBoard sitting around rather than an RPi, so I decided to use that instead (and for good reason: Raspbian, the recommended software on which to install Pi-hole, is just Debian optimized for the RPi, so I expected good interoperability). I can tell you that it does work very well, but there were a few snags that made it a little less than straightforward. This tutorial will focus on solutions to those problems.</p>
+<h3 id="my-deployment">My deployment</h3>
+<p>Just so you&rsquo;re clear, here&rsquo;s what I&rsquo;m using:</p>
+<ul>
+<li>element14 BeagleBone Black (BBB) rev. C, connected via ethernet to my router;</li>
+<li>Asus router;</li>
+<li>Debian 8.6 (&ldquo;Jessie&rdquo;) <a href="https://beagleboard.org/latest-images">IoT image</a>, selected because it&rsquo;s a minimal installation that supports the BBB&rsquo;s onboard connectivity ports but eschews GUI elements (window managers, desktop environments, etc). Installed is only ~1.6gb.</li>
+</ul>
+<p>I flashed the image to the onboard eMMC using <a href="http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/">these instructions</a>, rather than running it full-time from the SD card itself. During flashing, remember that the LEDs will light up in a pattern (1-2-3-4-3-2-1-2-3-4&hellip;.) and then go all solid when complete; if you&rsquo;re having trouble flashing, navigate to <code>/boot/uEnv.txt</code> on the SD card and <em>uncomment</em> the following line:</p>
+<pre><code>:::```
+cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
+</code></pre>
+<p>You will also want to modify the following lines in that same file, changing <code>enable</code> to <code>disable</code>:</p>
+<pre><code>:::```
+cmdline=coherent_pool=1M quiet net.ifnames=0 cape_universal=disable
+</code></pre>
+<p>As well as changing the following <code>1</code> to <code>0</code>:</p>
+<pre><code>:::```
+enable_uboot_cape_universal=1
+</code></pre>
+<p>Details on these variable changes can be found at the bottom of this post under the 3/21/2017 update.</p>
+<p>Once flashing is complete, shut down the BBB, remove the SD card, reboot it, and update the software. At this point you would normally be ready to install Pi-hole, but for this tutorial I&rsquo;m going to work backwards. The two tasks below are things I discovered I had to do only after the software was installed, so rather than walk you through that way (and risk the need to reinstall Pi-hole if something doesn&rsquo;t work out), we&rsquo;ll take care of these two things first. Note that you could also use these tasks to troubleshoot an existing BBB installation that isn&rsquo;t working.</p>
+<h3 id="first-task-uninstalling-connman-to-free-port-53">First task: Uninstalling ConnMan to free port 53</h3>
+<p>The first thing I encountered after installing Pi-hole was that I couldn&rsquo;t actually visit any websites after switching the router DNS settings to point to the BBB. It would work fine if I flipped my router back to the OpenDNS IPs. I could ping Google from my desktop and from the BBB over ssh, which told me that traffic could get out if directed to specific IPs, but the inability to put a URL in a browser and get a website seemed to imply that DNS wasn&rsquo;t able to actually resolve any IPs.</p>
+<p>Since Pi-hole prefers <a href="https://wiki.archlinux.org/index.php/dnsmasq">dnsmasq</a> as the resolver program, I decided to look at its config file (found at <code>/etc/dnsmasq.conf</code>) for obvious problems and check its syntax (<code>dnsmasq --test</code>). Everything turned out fine and syntax was OK.</p>
+<p>Next, I checked its status (<code>systemctl status dnsmasq.service</code>) and got a <strong>failure.</strong> However, it wasn&rsquo;t very verbose and only really gave me an &ldquo;exit-code: 2&rdquo; error. I then resorted to <code>sudo dnsmasq</code> to check the output, and got in return: <code>dnsmasq: failed to create listening socket for port 53: Address already in use!</code> This indicated that something was already bound to and listening on port 53, which was preventing dnsmasq from doing so and thereby disallowing DNS resolution.</p>
+<p>To determine what it was, I asked for the list of programs listening to that port. Running <code>lsof +M -nPi :53</code> gave me:</p>
+<pre><code>:::code
+COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+connmand 3825    root   4u   IPv4 165918      0t0  UDP * :53
+connmand 3825    root   5u   IPv4 165919      0t0  TCP * :53 (LISTEN)
+connmand 3825    root   6u   IPv6 165920      0t0  UDP * :53
+connmand 3825    root   7u   IPv6 165921      0t0  TCP * :53 (LISTEN)
+</code></pre>
+<p>If dnsmasq was configured correctly, you would see that under &ldquo;COMMAND&rdquo; rather than connmand (or connman-daemon). <a href="https://wiki.archlinux.org/index.php/Connman">Connman</a> was present here because that&rsquo;s the default network manager bundled with the IoT image I was using (see <a href="https://groups.google.com/forum/#!topic/beagleboard/7pex-V9vYWw">this thread</a> for details about why it&rsquo;s included, aside from the fact that it&rsquo;s designed for embedded devices).</p>
+<p>This portion can be a bit tricky, because connman is likely to be this system&rsquo;s default (and only) network manager; if you uninstall it without another management utility in place, you&rsquo;ll be stuck without a way to ssh back into the system. The solution is to install network-manager (<code>apt-get install network-manager</code>), which will recognize the dependencies <strong>and</strong> uninstall connman for you. Once you do this, give it a few minutes and resist the urge to restart the BBB; network-manager will come back up without starting a new ssh session, even though it hangs in the middle of the process. Try to be patient!</p>
+<p>As an aside, if you would rather keep connman around and just configure the network interface utilities more intelligently, it&rsquo;s possible to get connman and network-manager to play nicely together. See <a href="https://groups.google.com/forum/#!searchin/beagleboard/neutrinos4all%7Csort:relevance/beagleboard/-Ev4jf03EQ4/EjyANDGWFgAJ">this discussion</a> for details and the associated commands.</p>
+<p>Once this was done, I checked dnsmasq again (<code>systemctl status dnsmasq.service</code>) and found it to be running. Success! If you find that things still aren&rsquo;t working and you&rsquo;ve tried to restart networking (<code>/etc/init.d/networking restart</code>), note that rebooting the BBB should take care of it.</p>
+<h3 id="second-task-uninstalling-nodejs-to-free-port-80">Second task: Uninstalling node.js to free port 80</h3>
+<p>The second thing I encountered, after getting the DNS resolution to work and checking from the command line that Pi-hole was working, was an inability to access the web interface to manage. Typing <code>http://type.your.pihole.ip/admin/</code> into your browser&rsquo;s URL bar should take you to a nifty little web interface, and from here you can see stats about ads blocked, DNS queries forwarded, etc. It&rsquo;s not necessary for a fully functional Pi-hole, but it&rsquo;s fun and I couldn&rsquo;t access it.</p>
+<p>The browser gave some HTML that said &ldquo;Couldn&rsquo;t GET /admin/,&rdquo; so because the GET request was failing I thought that the HTTP content needed by the web interface couldn&rsquo;t be retrieved over port 80. I used the same <code>lsof</code> trick used above, but this time substituted port 80 for 53:</p>
+<pre><code> COMMAND   PID     USER    FD  TYPE   DEVICE SIZE/OFF  NODE NAME
+ nodejs   1214 www-data    5u  IPv4   17813       0t0  TCP * :80 (LISTEN)
+ nodejs   1214 www-data    6u  IPv6   17814       0t0  TCP * :80 (LISTEN)
+</code></pre>
+<p>So, here the same thing was happening, but this time <a href="https://wiki.archlinux.org/index.php/Node.js_">node.js</a> was sitting on port 80. This was also a feature bundled with the BeagleBone software, allowing users to use its included node.js <a href="http://beagleboard.org/support/bonescript">BoneScript</a> library to interface with the BBB via browser. The problem, of course, is that it uses port 80 to deliver that experience to your browser. Pi-hole needs that port in order to deliver the web interface with <a href="https://wiki.archlinux.org/index.php/lighttpd">lighttpd</a>, so the two are at odds (and since the node.js utilities are probably called pretty early during BBB startup to support those functions, it probably beats the lighttpd initialization calls that were installed post-hoc on top of the system software by Pi-hole).</p>
+<p>Uninstalling node.js also removed bonescript, cloud9, and some other things, freeing up yet more space on the BBB. In order to work backwards to node.js and avoid potential &ldquo;unmet dependency&rdquo; errors, execute the following commands:</p>
+<pre><code>:::```
+sudo apt remove --purge bonescript
+sudo apt remove --purge c9-core-installer
+sudo apt remove --purge nodejs
+</code></pre>
+<p>Once complete, I restarted the service (<code>/etc/init.d/lighttpd restart</code>) and reloaded the web interface. It worked! Problem solved.</p>
+<h3 id="third-task-installing-pi-hole">Third task: Installing Pi-hole</h3>
+<p>Now that these problems are out of the way, you can proceed with the actual Pi-hole installation. This was the easiest thing to do, as following <a href="https://www.youtube.com/watch?v=TzFLJqUeirA">these</a> <a href="https://www.youtube.com/watch?v=y7w2W2HXt3s">instructions</a> worked without issue following default settings. If problems arise, don&rsquo;t forget that you can debug (<code>pihole -d</code>), reconfigure or reinstall (<code>pihole -r</code>), and check that the Gravity script is actually pulling updated blocking lists (<code>pihole -g</code>).</p>
+<p>Hopefully this tutorial was helpful. If you have any questions or comments, please send me an email!</p>
+<!-- raw HTML omitted -->
+<h3 id="changelog">Changelog</h3>
+<h4 id="update-3212017">Update 3/21/2017</h4>
+<p>After some experience with this setup, I noticed (<code>df -h</code>) that my ROM was being filled at an alarming rate&ndash;over the course of a 24h period, I had lost nearly a gigabyte of the BBB&rsquo;s remaining memory. Almost all of it was due to an exploding kern.log file, to which hundreds of entries a minute were being written with <code>universal cape not found</code> errors. It seemed that the device was looking for attached capes and, finding none, incessantly wrote these errors to kern.log.</p>
+<p>In order to rectify this problem, I found setting those variable changes in the <code>uEnv.txt</code> file (the procedure for which is mentioned above) eliminated the problem, as these disable the BeagleBone&rsquo;s Universal Cape polling capability and all the errors it writes to the log file when it fails. If you were also interested in examining your device, I would recommend navigating to <code>/var/log</code> and executing this command: <code>du -hsx * | sort -rh | head -10</code>. It&rsquo;ll give you the top ten largest files in your present working directory, sorted by size.</p>
+<!-- raw HTML omitted -->
+<h4 id="update-123118">Update 12/31/18</h4>
+<p>I added some detail to the process for uninstalling node.js, namely working backwards from <code>bonescript</code> to <code>node.js</code> to avoid getting &ldquo;unmet dependencies&rdquo; errors. I also added detail about the <code>uEnv.txt</code> line. Thanks, Harold!</p>
+
+    </article>
+
+    
+
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/blog/physicalmanagers/" data-toggle="tooltip" data-placement="top" title="">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/blog/powertop/" data-toggle="tooltip" data-placement="top" title="">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+
+</body>
+</html>

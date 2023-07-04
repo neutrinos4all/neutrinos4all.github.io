@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title> - Applied Caffeine</title>
+  <meta property="og:title" content=" - Applied Caffeine" />
+  <meta name="twitter:title" content=" - Applied Caffeine" />
+  <meta name="description" content="Title: PowerTOP at boot and startup scripts Date: 2016-09-3 Category: blog Slug: powertop-and-linux-startup-scripts Tags: tutorials Summary: So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware. That&rsquo;s great! The question now becomes: &ldquo;How should I implement these power-saving settings automatically every time I reboot my laptop?&rdquo;
+So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware.">
+  <meta property="og:description" content="Title: PowerTOP at boot and startup scripts Date: 2016-09-3 Category: blog Slug: powertop-and-linux-startup-scripts Tags: tutorials Summary: So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware. That&rsquo;s great! The question now becomes: &ldquo;How should I implement these power-saving settings automatically every time I reboot my laptop?&rdquo;
+So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware.">
+  <meta name="twitter:description" content="Title: PowerTOP at boot and startup scripts Date: 2016-09-3 Category: blog Slug: powertop-and-linux-startup-scripts Tags: tutorials Summary: So, you have a laptop on which you&rsquo;ve installed …">
+  <meta name="author" content="Adam M. Houser, Ph.D."/>
+  <meta property="og:site_name" content="Applied Caffeine" />
+  <meta property="og:url" content="https://appliedcaffeine.org/blog/powertop/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.115.0">
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/style-dark.css" media="all and (prefers-color-scheme: dark)" />
+
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+
+  <script src="/js/script.js"></script>
+  <script src="/js/custom.js"></script>
+  <script defer src="/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Applied Caffeine</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-contact"><a href="/contact" title="Contact">Contact</a></li>
+      <li class="site-navi-item-tags"><a href="/tags" title="Tags">Tags</a></li>
+      <li class="site-navi-item-about"><a href="/about" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title"></h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>January 1, 0001</time></li>
+      </ul>
+      
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#using-startup-scripts-the-right-way">Using startup scripts the right way</a></li>
+        <li><a href="#creating-your-startup-script">Creating your startup script</a></li>
+        <li><a href="#so-what-if-you-wanted-to-take-the-easy-way-out">So what if you wanted to take the easy way out?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+      <p>Title: PowerTOP at boot and startup scripts
+Date: 2016-09-3
+Category: blog
+Slug: powertop-and-linux-startup-scripts
+Tags: tutorials
+Summary: So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware. That&rsquo;s great! The question now becomes: &ldquo;How should I implement these power-saving settings automatically every time I reboot my laptop?&rdquo;</p>
+<p>So, you have a laptop on which you&rsquo;ve installed Linux, and you&rsquo;ve configured and used PowerTOP to reduce the power consumption of said hardware. That&rsquo;s great! The question now becomes &ldquo;How should I implement these power-saving settings automatically every time I reboot my laptop?&rdquo;. You have two slightly different options, depending on which of the following strategies you used:</p>
+<ol>
+<li>Upon visiting the <em>Tunables</em> tab, you tested each tunable item individually to ensure that optimizing its power consumption introduced no system instabilities; or</li>
+<li>You said &ldquo;That&rsquo;s too much tinkering for me, can&rsquo;t we do this in some easier manner?&rdquo; and have auto-tuned everything from <code>Bad</code> to <code>Good</code>.</li>
+</ol>
+<p>Either way, any changes you make will be lost upon reboot. In order to make it persist, you have to tell PowerTOP to run every time the machine starts. That&rsquo;s an easy thing to do.</p>
+<h3 id="using-startup-scripts-the-right-way">Using startup scripts the right way</h3>
+<p>I&rsquo;ll cut right to the chase: generally speaking, there&rsquo;s a right and a wrong way to use startup scripts. The right way is to write the script, save it in <code>/usr/local/bin</code>, and call it at boot from <code>/etc/rc.local</code>. First, it&rsquo;s important to do this for everything&ndash;even single-line commands, even if you think it would be easier to just write the command in this file and let it run at boot. You&rsquo;ll want to take this approach for the same reasons that you should avoid magic numbers in code.</p>
+<p>Second, I strongly feel that you should store any script you write in <code>/usr/local/bin</code> rather than <code>/usr/bin</code>, even if you&rsquo;re the only user for that machine. It can be a dangerous gambit to play in <code>/usr/bin</code>&ndash;the system-level binaries directory&ndash;from the command line, particularly if something doesn&rsquo;t run as expected and a user is required to make edits in quick succession. Keeping your custom-made or -loaded binaries in <code>/usr/local/bin</code> can help keep your scripts easy to find and maintain the integrity/resilience of your system.</p>
+<p>I think the wrong way use startup scripts is to do the opposite of what I just mentioned. For example, it&rsquo;s possible to run <code>powertop --auto-tune</code> at boot just by writing that line and saving it in <code>rc.local</code>. That&rsquo;s an example of a single-line command that&rsquo;s not included in a script. For a more correct solution, see the final section.</p>
+<h3 id="creating-your-startup-script">Creating your startup script</h3>
+<p>As mentioned before, this post supposes that you&rsquo;ve successfully configured and run PowerTOP and have isolated the commands necessary for tuning each of the parameters you want to tune (and if you need an explainer, see their <a href="https://01.org/sites/default/files/page/powertop_users_guide_201412.pdf">user guide</a>). Once you&rsquo;ve completed this step&hellip;</p>
+<ol>
+<li>
+<p>From the terminal, create a startup script by typing <code>sudo touch /usr/local/bin/powertop.sh</code>. If you want, navigate to the directory and verify that the empty file was created.</p>
+</li>
+<li>
+<p>While in this file&rsquo;s directory, go ahead and make the file executable (it won&rsquo;t be system-executable by default) by typing <code>sudo chmod +x powertop.sh</code>.</p>
+</li>
+<li>
+<p>Once this is done, next we&rsquo;re going to use the terminal to generate an HTML report with the <code>powertop --html</code> command. This will generate a file named <code>powertop.html</code> in your <code>/home</code> folder.</p>
+</li>
+<li>
+<p>Open the file with a web browser, navigate to the &ldquo;Tuning&rdquo; tab, and you&rsquo;ll find commands in the right-hand column necessary to tune their corresponding parameters in the left-hand column.</p>
+</li>
+<li>
+<p>For each parameter that you&rsquo;ve decided to tune, copy only the command and paste it into the file you created.</p>
+<p>Once you&rsquo;re done, it will probably look similar to this:</p>
+<pre><code> :::bash
+ #!/usr/bin/env bash
+ iw dev wlan0 set power_save off
+ echo 'min_power' &gt; '/sys/class/scsi_host/host0/link_power_management_policy';
+ echo '0' &gt; '/proc/sys/kernel/nmi_watchdog';
+ echo '1500' &gt; '/proc/sys/vm/dirty_writeback_centisecs';
+ echo '1' &gt; '/sys/module/snd_hda_intel/parameters/power_save';
+ echo 'auto' &gt; '/sys/bus/usb/devices/2-6/power/control';
+ echo 'auto' &gt; '/sys/bus/usb/devices/5-1/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1f.3/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:00.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:02.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1a.7/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1b.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:02:00.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1a.1/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1f.1/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1d.1/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1d.2/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1d.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1c.4/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1a.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1c.0/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1f.2/power/control';
+ echo 'auto' &gt; '/sys/bus/pci/devices/0000:00:1d.7/power/control';
+ ethtool -s eth0 wol d;
+</code></pre>
+<p>If you aren&rsquo;t familiar with startup scripts, note that it always requires a shebang (and nothing else) on the first line. In simple terms, the shebang tells the system how to interpret and execute the file. In this example, we&rsquo;ve specified bash as the shell. This is important because scripts usually include shell-specific syntax, so if you&rsquo;ve written your script and it uses bash syntax, you&rsquo;ll want to give the system a directive to execute the script by using bash.</p>
+<p>It&rsquo;s also important to note that I&rsquo;ve written <code>#!usr/bin/env bash</code> rather than <code>#!/bin/bash</code> because bash does not necessarily live in <code>/bin</code> on all systems. Because I want this tutorial to be useful for a wide variety of users who may be using different Linux distributions, I wanted to structure the line so it finds bash wherever it lives. If you&rsquo;re interested in finding it yourself, try <code>echo $SHELL</code> in your terminal.</p>
+</li>
+<li>
+<p>Once all of the desired commands have been copied over and the file is saved, find and edit <code>/etc/rc.local</code>.</p>
+<p>It should already have something like this in the file:</p>
+<pre><code> :::code
+ #!/bin/sh -e
+ #
+ # rc.local
+ #
+ # This script is executed at the end of each multiuser runlevel.
+ # Make sure that the script will &quot;exit 0&quot; on success or any other
+ # value on error.
+ #
+ # In order to enable or disable this script just change the execution
+ # bits.
+ #
+ # By default this script does nothing.
+</code></pre>
+<p>Directly below the lines that have been commented out, add the script you just created to <code>rc.local</code>. It should now look like this:</p>
+<pre><code> :::code
+ #!/bin/sh -e
+ #
+ # rc.local
+ #
+ # This script is executed at the end of each multiuser runlevel.
+ # Make sure that the script will &quot;exit 0&quot; on success or any other
+ # value on error.
+ #
+ # In order to enable or disable this script just change the execution
+ # bits.
+ #
+ # By default this script does nothing.
+
+ /usr/local/bin/powertop.sh
+
+ exit 0
+</code></pre>
+</li>
+<li>
+<p>Ensure that the script is executable, because it&rsquo;s not by default. Once you&rsquo;ve navigated to <code>/usr/local/bin</code>, change its permissions like so: <code>chmod +x powertop.sh</code>.</p>
+</li>
+</ol>
+<p>That&rsquo;s it! Save the file, close everything down, and restart. Verify that the script was loaded at startup by running PowerTOP again and seeing if the parameters you selected for tuning are in fact set to <code>Good</code>.</p>
+<h3 id="so-what-if-you-wanted-to-take-the-easy-way-out">So what if you wanted to take the easy way out?</h3>
+<p>At the top I said that one could take the easy approach to the problem and, rather than manually specifying which parameters you&rsquo;d like to tune, you just want to allow PowerTOP to tune the entire machine&ndash;consequences or no. If that&rsquo;s the case, you can ask PowerTOP to auto-tune the machine at boot, and the procedure is fairly straightforward.</p>
+<ol>
+<li>
+<p>Follow steps 1 and 2 from the directions set in the section above.</p>
+</li>
+<li>
+<p>Rather than manually copying and pasting the tuning commands into the file, instead replace it with the auto-tune command.</p>
+<p>It should look like this:</p>
+<pre><code> :::code
+ #!/usr/bin/env bash
+ powertop --auto-tune
+</code></pre>
+<p>That&rsquo;s it! All this script does is call the auto-tune function included natively with PowerTOP, rather than specifying a series of individual file changes to be made as we did in the first script we wrote.</p>
+</li>
+<li>
+<p>Complete everything in step 6 from the section above, editing <code>rc.local</code> and verifying that changes were made by running PowerTOP again. It may seem a little unnecessarily convoluted to take this path, and it may seem trivial enough that you could easily just call the auto-tune function from within <code>rc.local</code> on its own, but if I&rsquo;m going to do any script writing I like to try to follow best practices. Ultimately, it&rsquo;s up to each individual user to decide what&rsquo;s best for his or her system.</p>
+</li>
+</ol>
+<p>And that&rsquo;s it! Hopefully this has been helpful and you&rsquo;ve learned a little along the way. If you have any questions or think that something is erroneous, please send me an email through the link at the top of the page.</p>
+
+    </article>
+
+    
+
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/blog/pihole/" data-toggle="tooltip" data-placement="top" title="">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/blog/programcosts/" data-toggle="tooltip" data-placement="top" title="">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+
+</body>
+</html>
